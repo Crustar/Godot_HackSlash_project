@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1tv4ktn7kmt6"]
+
+[ext_resource type="Texture2D" uid="uid://c0tllef5hy03q" path="res://asset/chara_placeholder.png" id="1_glwn7"]
+[ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://state_machine/state_machine.tscn" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://state_machine/player/ground.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://bjyvw7vluxeet" path="res://state_machine/player/air.gd" id="5_g6k8r"]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_rkbax")
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -32, -7, -27, -7, -23, -7, 0, 7, 0, 7, -27, 2, -32)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_glwn7")
+
+[node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node") instance=ExtResource("3_yw30f")]
+initial_state = NodePath("ground")
+player_node = NodePath("..")
+
+[node name="ground" type="Node" parent="state_machine"]
+script = ExtResource("4_qjkh3")
+
+[node name="air" type="Node" parent="state_machine"]
+script = ExtResource("5_g6k8r")
