@@ -1,1 +1,32 @@
-# Godot_HackSlash_project
+# About this prototype
+This prototype is meant to simulate the character object and its physics interaction.
+
+A state machine is implemented to organise different states of the character
+behavior, which includes:
+
+1. Idle
+
+2. Jump
+
+3. Fall
+
+4. Run
+
+5. Attack (TODO)
+
+6. Dodge (TODO)
+
+7. Double jump (TODO)
+
+8. Hurt (TODO)
+
+9. Death (TODO)
+
+# Known issues
+NONE
+
+# Future todo lists
+1. Add placeholder animation to be implemented into the state machine design
+
+2. Replace the current state machine trigger system from "Checking every tick"
+to "Triggered by signal event" in order to improve performance.
