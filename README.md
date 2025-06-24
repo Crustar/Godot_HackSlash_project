@@ -26,7 +26,7 @@ behavior, which includes:
 NONE
 
 # Future todo lists
-1. Add placeholder animation to be implemented into the state machine design
-
-2. Replace the current state machine trigger system from "Checking every tick"
+1. Replace the current state machine trigger system from "Checking every tick"
 to "Triggered by signal event" in order to improve performance.
+
+2. Add a "PlayerAnimationPlayer" class for better IDE compatibility

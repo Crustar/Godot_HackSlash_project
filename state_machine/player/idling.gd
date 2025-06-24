@@ -1,12 +1,19 @@
 extends PlayerState
 
 
-func enter():
+func enter() -> void:
+	animation.play("idling")
 	print_debug("entering IDLING state")
+
+func exit() -> void:
+	pass
+	
+func frame_update(delta: float) -> void:
+	pass
 
 func physics_update(delta: float) -> void:
 	# Physic logic
-	player.velocity.x = move_toward(player.velocity.x, 0, player.ACCELERATION * delta)
+	player.velocity.x = move_toward(player.velocity.x, 0, player.FRICTION * delta)
 	
 	player.velocity += player.get_gravity() * delta	
 	player.move_and_slide()
@@ -25,6 +32,3 @@ func physics_update(delta: float) -> void:
 
 	
 	
-
-func frame_update(delta: float) -> void:
-	pass

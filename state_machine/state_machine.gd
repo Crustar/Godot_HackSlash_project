@@ -2,6 +2,7 @@ extends Node
 
 @export var initial_state : PlayerState
 @export var player_node : CharacterBody2D
+@export var animation_player_node : AnimationPlayer
 var current_state: PlayerState
 var states: Dictionary = {}
 
@@ -10,6 +11,7 @@ func _ready() -> void:
 		if child is PlayerState :
 			states[child.name.to_lower()] = child
 			child.player = player_node
+			child.animation = animation_player_node
 			child.Transition.connect(on_state_transition)
 	if initial_state:
 		initial_state.enter()

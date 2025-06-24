@@ -1,11 +1,16 @@
 extends PlayerState
 
 
-func enter():
+func enter() -> void:
+	animation.play("running")
 	print_debug("entering RUNNING state")	
 
-func exit():
+func exit() -> void:
 	pass
+
+func frame_update(delta: float) -> void:
+	var direction := Input.get_axis("left", "right")
+	animation.flip_sprite(direction)
 
 func physics_update(delta: float) -> void:
 	# physic logic
@@ -28,6 +33,3 @@ func physics_update(delta: float) -> void:
 	
 	
 	
-
-func frame_update(delta: float) -> void:
-	pass
