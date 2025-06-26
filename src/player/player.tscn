@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=3 uid="uid://c1tv4ktn7kmt6"]
 
-[ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
 [ext_resource type="Texture2D" uid="uid://d2h2k6jp0iv31" path="res://asset/player_sprite/Walking_KG_2.png" id="3_8t03j"]
-[ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://state_machine/state_machine.tscn" id="3_yw30f"]
+[ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://src/state_machine/state_machine.tscn" id="3_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dojlaqus2hxqb" path="res://asset/player_sprite/Jump_KG_2.png" id="4_2ieo8"]
-[ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://state_machine/player/idling.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://src/state_machine/player/idling.gd" id="4_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://cf0gnv5f8p6q7" path="res://asset/player_sprite/Fall_KG_2.png" id="5_ebec5"]
-[ext_resource type="Script" uid="uid://bjyvw7vluxeet" path="res://state_machine/player/jumping.gd" id="5_g6k8r"]
-[ext_resource type="Script" uid="uid://drga8t1ag4yx7" path="res://player/animation_player.gd" id="6_2ieo8"]
-[ext_resource type="Script" uid="uid://2fa5l36hxnxi" path="res://state_machine/player/falling.gd" id="6_boad6"]
-[ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://state_machine/player/running.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://bjyvw7vluxeet" path="res://src/state_machine/player/jumping.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://2fa5l36hxnxi" path="res://src/state_machine/player/falling.gd" id="6_boad6"]
+[ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
+[ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
 
 [sub_resource type="Animation" id="Animation_kb6p2"]
 length = 0.001
@@ -298,18 +298,19 @@ position = Vector2(1, -32)
 texture = ExtResource("2_boad6")
 hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
+[node name="CharacterAnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
 libraries = {
 &"": SubResource("AnimationLibrary_e7oew")
 }
 autoplay = "idling"
-script = ExtResource("6_2ieo8")
+script = ExtResource("6_ylhto")
 sprite = NodePath("../Sprite")
+metadata/_custom_type_script = "uid://bu1x4j5ovdkc2"
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")
 player_node = NodePath("..")
-animation_player_node = NodePath("../AnimationPlayer")
+animation_player_node = NodePath("../CharacterAnimationPlayer")
 
 [node name="idling" type="Node" parent="state_machine"]
 script = ExtResource("4_qjkh3")

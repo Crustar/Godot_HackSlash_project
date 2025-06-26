@@ -2,7 +2,7 @@ extends Node
 
 @export var initial_state : PlayerState
 @export var player_node : CharacterBody2D
-@export var animation_player_node : AnimationPlayer
+@export var animation_player_node : CharacterAnimationPlayer
 var current_state: PlayerState
 var states: Dictionary = {}
 
