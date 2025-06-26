@@ -2,10 +2,12 @@ extends PlayerState
 
 
 func enter() -> void:
+	super()
 	animation.play("running")
 	print_debug("entering RUNNING state")	
 
 func exit() -> void:
+	super()
 	pass
 
 func frame_update(delta: float) -> void:
@@ -24,12 +26,20 @@ func physics_update(delta: float) -> void:
 	
 	
 	# transition logic
-	if !direction : # no more input -> idling state
-		Transition.emit(self,"idling")
+	#if !direction : # no more input -> idling state
+		#Transition.emit(self,"idling")
 	if !player.is_on_floor(): # player can fall -> falling state
 		Transition.emit(self,"falling")
-	elif Input.is_action_just_pressed("jump"): # jump pressed -> jumping state
-		Transition.emit(self,"jumping")
+	#elif Input.is_action_just_pressed("jump"): # jump pressed -> jumping state
+	#	Transition.emit(self,"jumping")
 	
-	
+
+func on_player_event(event: String) :
+	match event:
+		"no_left_no_right":
+			Transition.emit(self,"idling")
+		"jump":
+			Transition.emit(self,"jumping")
+		_:
+			pass
 	

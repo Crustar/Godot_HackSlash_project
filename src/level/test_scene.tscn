@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1jm0kdjsdoh"]
+[gd_scene load_steps=5 format=3 uid="uid://d1jm0kdjsdoh"]
 
 [ext_resource type="PackedScene" uid="uid://c1tv4ktn7kmt6" path="res://src/player/player.tscn" id="1_fovfd"]
+[ext_resource type="Texture2D" uid="uid://1wyjn7lv22wc" path="res://icon.svg" id="2_7bmmq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qwlh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fovfd"]
+size = Vector2(226, 41)
 
 [node name="test_scene" type="Node"]
 
@@ -14,3 +18,13 @@ position = Vector2(164, 131)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
 position = Vector2(195, 264)
 shape = SubResource("WorldBoundaryShape2D_qwlh6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="floor"]
+position = Vector2(333, 234)
+shape = SubResource("RectangleShape2D_fovfd")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="floor/CollisionShape2D2"]
+position = Vector2(0, 5.72205e-06)
+scale = Vector2(1.76563, 0.3125)
+texture = ExtResource("2_7bmmq")

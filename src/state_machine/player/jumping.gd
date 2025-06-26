@@ -2,11 +2,13 @@ extends PlayerState
 
 
 func enter() -> void:
+	super()
 	player.velocity.y += - player.JUMP_VELOCITY
 	animation.play("jumping")
 	print_debug("entering JUMPING state")
 
 func exit() -> void:
+	super()
 	pass
 
 func frame_update(delta: float) -> void:
@@ -34,3 +36,8 @@ func physics_update(delta: float) -> void:
 		else: # ...directional input in absent -> idling state 
 			Transition.emit(self,"idling")
 		
+
+func on_player_event(event: String) :
+	pass
+	
+	

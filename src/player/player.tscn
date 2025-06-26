@@ -298,7 +298,7 @@ position = Vector2(1, -32)
 texture = ExtResource("2_boad6")
 hframes = 4
 
-[node name="CharacterAnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
 libraries = {
 &"": SubResource("AnimationLibrary_e7oew")
 }
@@ -310,7 +310,7 @@ metadata/_custom_type_script = "uid://bu1x4j5ovdkc2"
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")
 player_node = NodePath("..")
-animation_player_node = NodePath("../CharacterAnimationPlayer")
+animation_player_node = NodePath("../AnimationPlayer")
 
 [node name="idling" type="Node" parent="state_machine"]
 script = ExtResource("4_qjkh3")

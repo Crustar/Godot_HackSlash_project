@@ -23,10 +23,7 @@ behavior, which includes:
 9. Death (TODO)
 
 # Known issues
-NONE
+1. Running into a wall is causing jittering
 
 # Future todo lists
-1. Replace the current state machine trigger system from "Checking every tick"
-to "Triggered by signal event" in order to improve performance.
-
-2. Add a "PlayerAnimationPlayer" class for better IDE compatibility
+1. Add more states
