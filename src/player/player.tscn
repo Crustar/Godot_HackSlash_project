@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=21 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -8,9 +8,11 @@
 [ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://src/state_machine/player/idling.gd" id="4_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://cf0gnv5f8p6q7" path="res://asset/player_sprite/Fall_KG_2.png" id="5_ebec5"]
 [ext_resource type="Script" uid="uid://bjyvw7vluxeet" path="res://src/state_machine/player/jumping.gd" id="5_g6k8r"]
+[ext_resource type="Texture2D" uid="uid://b3fkani0umoew" path="res://asset/player_sprite/Dashing_KG_1.png" id="6_2smqc"]
 [ext_resource type="Script" uid="uid://2fa5l36hxnxi" path="res://src/state_machine/player/falling.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
 [ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
 
 [sub_resource type="Animation" id="Animation_kb6p2"]
 length = 0.001
@@ -278,9 +280,62 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_rl62b"]
+resource_name = "dashing"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_2smqc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7oew"]
 _data = {
 &"RESET": SubResource("Animation_kb6p2"),
+&"dashing": SubResource("Animation_rl62b"),
 &"falling": SubResource("Animation_tqiix"),
 &"idling": SubResource("Animation_yllr7"),
 &"jumping": SubResource("Animation_32hag"),
@@ -294,6 +349,7 @@ script = ExtResource("1_rkbax")
 polygon = PackedVector2Array(12, 0, -8, 0, -8, -33, -12, -33, -12, -59, 13, -59, 13, -33, 12, -33)
 
 [node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(1, -32)
 texture = ExtResource("2_boad6")
 hframes = 4
@@ -325,3 +381,13 @@ metadata/_custom_type_script = "uid://p8ksei017jna"
 [node name="running" type="Node" parent="state_machine"]
 script = ExtResource("7_boad6")
 metadata/_custom_type_script = "uid://p8ksei017jna"
+
+[node name="dashing" type="Node" parent="state_machine"]
+script = ExtResource("12_cwolq")
+
+[node name="dash_duration" type="Timer" parent="state_machine/dashing"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]

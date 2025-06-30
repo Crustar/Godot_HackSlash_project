@@ -5,6 +5,7 @@ func enter() -> void:
 	super()
 	
 	player.jump_count = 0
+	player.dash_count = 0
 	
 	animation.play("running")
 	print_debug("entering RUNNING state")	
@@ -46,6 +47,10 @@ func on_player_event(event: String) :
 				player.velocity.y = - player.JUMP_VELOCITY
 				player.jump_count += 1
 			Transition.emit(self,"jumping")
+		"dash":
+			if player.dash_count < player.max_dash :
+				player.dash_count += 1
+				Transition.emit(self,"dashing")
 		_:
 			pass
 	
