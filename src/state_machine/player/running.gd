@@ -3,6 +3,9 @@ extends PlayerState
 
 func enter() -> void:
 	super()
+	
+	player.jump_count = 0
+	
 	animation.play("running")
 	print_debug("entering RUNNING state")	
 
@@ -39,6 +42,9 @@ func on_player_event(event: String) :
 		"no_left_no_right":
 			Transition.emit(self,"idling")
 		"jump":
+			if player.jump_count < player.max_jump:
+				player.velocity.y = - player.JUMP_VELOCITY
+				player.jump_count += 1
 			Transition.emit(self,"jumping")
 		_:
 			pass

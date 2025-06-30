@@ -3,8 +3,9 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	player.velocity.y += - player.JUMP_VELOCITY
+	
 	animation.play("jumping")
+	
 	print_debug("entering JUMPING state")
 
 func exit() -> void:
@@ -38,6 +39,13 @@ func physics_update(delta: float) -> void:
 		
 
 func on_player_event(event: String) :
-	pass
+	match event:
+		"jump":
+			if player.jump_count < player.max_jump:
+				player.velocity.y = - player.JUMP_VELOCITY
+				player.jump_count += 1
+				print_debug("double jump")
+		_:
+			pass
 	
 	

@@ -1,13 +1,20 @@
 extends CharacterBody2D
 
 
+
 const SPEED = 300.0
 const JUMP_VELOCITY = 400.0
-
 const MAX_SPEED = 600.0
 const MAX_JUMP_VELOCITY = 700.0
 const ACCELERATION = 700.0
 const FRICTION = 1200.0
+
+
+
+var max_jump = 2
+var jump_count = 0
+
+
 
 signal player_event
 
@@ -15,9 +22,9 @@ var last_direction = 0
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("up"):
 		player_event.emit("up")
-	if Input.is_action_pressed("down"):
+	if Input.is_action_just_pressed("down"):
 		player_event.emit("down")
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		player_event.emit("jump")
 		
 	var direction = Input.get_axis("left", "right")

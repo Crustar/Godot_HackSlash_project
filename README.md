@@ -16,7 +16,7 @@ behavior, which includes:
 
 6. Dodge (TODO)
 
-7. Double jump (TODO)
+7. Double jump
 
 8. Hurt (TODO)
 

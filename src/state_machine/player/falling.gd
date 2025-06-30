@@ -32,7 +32,16 @@ func physics_update(delta: float) -> void:
 			Transition.emit(self,"running")
 		else: # ...directional input in absent -> idling state 
 			Transition.emit(self,"idling")
-		
+
+
 
 func on_player_event(event: String) :
-	pass
+	match event:
+		"jump":
+			if player.jump_count < player.max_jump:
+				player.velocity.y = - player.JUMP_VELOCITY
+				player.jump_count += 1
+				print_debug("double jump")
+				Transition.emit(self,"jumping")
+		_:
+			pass
