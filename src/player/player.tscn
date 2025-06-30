@@ -285,7 +285,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_rl62b"]
 resource_name = "dashing"
-length = 0.2
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -329,7 +329,7 @@ tracks/3/path = NodePath("Sprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -391,7 +391,13 @@ script = ExtResource("12_cwolq")
 
 [node name="dash_duration" type="Timer" parent="state_machine/dashing"]
 process_callback = 0
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -73
+limit_top = 0
+limit_right = 945
+limit_bottom = 415
 
 [connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]
