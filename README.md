@@ -14,7 +14,7 @@ behavior, which includes:
 
 5. Attack (TODO)
 
-6. Dodge (TODO)
+6. Dash
 
 7. Double jump
 
@@ -23,7 +23,8 @@ behavior, which includes:
 9. Death (TODO)
 
 # Known issues
-1. Running into a wall is causing jittering
+
 
 # Future todo lists
 1. Add more states
+2. Add particul effects upon dash and double juimp

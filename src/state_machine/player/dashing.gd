@@ -8,6 +8,12 @@ var base_velocity = 0
 func enter() -> void:
 	super()
 	base_velocity = abs(player.velocity.x)
+	dash_direction = sign(Input.get_axis("left", "right"))
+	if dash_direction == 0: # fallback
+		if sprite.flip_h :
+			dash_direction =  -1
+		else:
+			dash_direction = 1
 	dash_duration.start()
 	animation.play("dashing")
 	print_debug("entering DASHING state")
@@ -22,14 +28,7 @@ func frame_update(delta: float) -> void:
 
 func physics_update(delta: float) -> void:
 	# Physic logic
-
-	if sprite.flip_h:
-		dash_direction = -1
-	else:
-		dash_direction = 1
-		
 	player.velocity.x = move_toward(player.velocity.x, (player.DASH_SPEED + base_velocity) * dash_direction, player.ACCELERATION * 10 * delta)
-		
 		
 	player.velocity += player.get_gravity() * delta	
 	player.move_and_slide()

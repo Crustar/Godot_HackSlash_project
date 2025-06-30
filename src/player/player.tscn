@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=22 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
 [ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2smqc"]
+size = Vector2(23, 58)
 
 [sub_resource type="Animation" id="Animation_kb6p2"]
 length = 0.001
@@ -345,14 +348,15 @@ _data = {
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
 
-[node name="Collision" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(12, 0, -8, 0, -8, -33, -12, -33, -12, -59, 13, -59, 13, -33, 12, -33)
-
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1, -32)
 texture = ExtResource("2_boad6")
 hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -30)
+shape = SubResource("RectangleShape2D_2smqc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite")]
 libraries = {
