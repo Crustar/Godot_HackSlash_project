@@ -1,0 +1,150 @@
+[gd_scene load_steps=9 format=3 uid="uid://djdhyunyv8025"]
+
+[ext_resource type="Texture2D" uid="uid://bcu2ii3dvgopp" path="res://asset/dummy_sprite/spritesheet.png" id="1_16l3b"]
+[ext_resource type="Texture2D" uid="uid://62ddtvj17oag" path="res://asset/dummy_sprite/Idle.png" id="1_uwpna"]
+[ext_resource type="Script" uid="uid://d00h1eohk2e71" path="res://src/enemy/hit_box.gd" id="2_uwpna"]
+
+[sub_resource type="Animation" id="Animation_16l3b"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.2, 0.2, 1), Color(1, 0.2, 0.2, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_16l3b")]
+}
+
+[sub_resource type="Animation" id="Animation_nccke"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_uwpna")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebd46"]
+_data = {
+&"RESET": SubResource("Animation_nccke"),
+&"hurt": SubResource("Animation_16l3b")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwpna"]
+size = Vector2(23, 69.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16l3b"]
+size = Vector2(16, 63)
+
+[node name="EnemyDummy" type="CharacterBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../Sprite")
+libraries = {
+&"": SubResource("AnimationLibrary_ebd46")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-2, -48)
+scale = Vector2(2, 2)
+texture = ExtResource("1_uwpna")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, -33)
+script = ExtResource("2_uwpna")
+
+[node name="hits_hape" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.5, -2.25)
+shape = SubResource("RectangleShape2D_uwpna")
+
+[node name="collision_shape" type="CollisionShape2D" parent="."]
+position = Vector2(1, -32.5)
+shape = SubResource("RectangleShape2D_16l3b")
+disabled = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="HitBox" method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]

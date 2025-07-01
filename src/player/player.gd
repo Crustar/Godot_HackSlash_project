@@ -31,6 +31,8 @@ func _process(delta: float) -> void:
 		player_event.emit("jump")
 	if Input.is_action_just_pressed("dash"):
 		player_event.emit("dash")
+	if Input.is_action_just_pressed("attack"):
+		player_event.emit("attack")
 		
 	var direction = Input.get_axis("left", "right")
 	if direction == 0 and last_direction != 0:

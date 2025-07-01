@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://d1jm0kdjsdoh"]
+[gd_scene load_steps=11 format=4 uid="uid://d1jm0kdjsdoh"]
 
 [ext_resource type="PackedScene" uid="uid://c1tv4ktn7kmt6" path="res://src/player/player.tscn" id="1_fovfd"]
 [ext_resource type="Texture2D" uid="uid://0dslwo30l0ia" path="res://asset/level_scene/Background_0.png" id="1_vk3x4"]
 [ext_resource type="Texture2D" uid="uid://bn57nvtvt83ew" path="res://asset/level_scene/Tree-Assets.png" id="3_dxo6u"]
 [ext_resource type="Texture2D" uid="uid://cx3w6ifyhprl7" path="res://asset/level_scene/Tiles.png" id="3_mqp3c"]
+[ext_resource type="PackedScene" uid="uid://djdhyunyv8025" path="res://src/enemy/enemy_dummy.tscn" id="4_dxo6u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05kt3"]
 texture = ExtResource("3_dxo6u")
@@ -776,7 +777,7 @@ size = Vector2(74, 7)
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.01, 0.01)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="MoonBackground" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("1_vk3x4")
 centered = false
 
@@ -803,12 +804,13 @@ position = Vector2(195, 321)
 polygon = PackedVector2Array(128, 0, -268, 0, -267, -324, -298, -324, -298, 90, 761, 90, 761, -290, 746, -290, 746, -50, 623, -51, 524, 0, 491, 0, 491, -49, 416, -49, 416, 0, 201, 0, 201, -49, 128, -49)
 
 [node name="platform" type="CollisionShape2D" parent="floor"]
+visible = false
 position = Vector2(56, 276)
 shape = SubResource("RectangleShape2D_vk3x4")
 one_way_collision = true
 
+[node name="EnemyDummy" parent="." instance=ExtResource("4_dxo6u")]
+position = Vector2(440, 316)
+
 [node name="player" parent="." instance=ExtResource("1_fovfd")]
 position = Vector2(44, 131)
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(953, 415)

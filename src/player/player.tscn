@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=26 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -12,7 +12,12 @@
 [ext_resource type="Script" uid="uid://2fa5l36hxnxi" path="res://src/state_machine/player/falling.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
 [ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
+[ext_resource type="Texture2D" uid="uid://btsaacjxujrm6" path="res://asset/player_sprite/Attack_KG_1.png" id="7_wlj80"]
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
+[ext_resource type="Script" uid="uid://c4arvahxckmcg" path="res://src/state_machine/player/attacking.gd" id="14_rl62b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bm8s"]
+size = Vector2(40, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2smqc"]
 size = Vector2(23, 58)
@@ -66,6 +71,70 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/attack_zone/attack_shape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rl62b"]
+resource_name = "dashing"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_2smqc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_tqiix"]
@@ -283,9 +352,9 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
-[sub_resource type="Animation" id="Animation_rl62b"]
-resource_name = "dashing"
-length = 0.3
+[sub_resource type="Animation" id="Animation_hrerp"]
+resource_name = "attacking"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -296,7 +365,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_2smqc")]
+"values": [ExtResource("7_wlj80")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -308,7 +377,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [6]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -329,15 +398,28 @@ tracks/3/path = NodePath("Sprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.225),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/attack_zone/attack_shape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7oew"]
 _data = {
 &"RESET": SubResource("Animation_kb6p2"),
+&"attacking": SubResource("Animation_hrerp"),
 &"dashing": SubResource("Animation_rl62b"),
 &"falling": SubResource("Animation_tqiix"),
 &"idling": SubResource("Animation_yllr7"),
@@ -354,6 +436,14 @@ position = Vector2(1, -32)
 texture = ExtResource("2_boad6")
 hframes = 4
 
+[node name="attack_zone" type="Area2D" parent="Sprite" groups=["Character_attack_zone"]]
+position = Vector2(0.5, 2)
+
+[node name="attack_shape" type="CollisionShape2D" parent="Sprite/attack_zone"]
+position = Vector2(25.5, 2)
+shape = SubResource("RectangleShape2D_6bm8s")
+disabled = true
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -30)
 shape = SubResource("RectangleShape2D_2smqc")
@@ -366,6 +456,12 @@ autoplay = "idling"
 script = ExtResource("6_ylhto")
 sprite = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://bu1x4j5ovdkc2"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -73
+limit_top = 0
+limit_right = 945
+limit_bottom = 415
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")
@@ -394,10 +490,10 @@ process_callback = 0
 wait_time = 0.3
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = -73
-limit_top = 0
-limit_right = 945
-limit_bottom = 415
+[node name="attacking" type="Node" parent="state_machine"]
+script = ExtResource("14_rl62b")
+metadata/_custom_type_script = "uid://p8ksei017jna"
 
+[connection signal="area_entered" from="Sprite/attack_zone" to="state_machine/attacking" method="_on_attack_zone_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="state_machine/attacking" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]
