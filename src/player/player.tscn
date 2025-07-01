@@ -463,6 +463,22 @@ limit_top = 0
 limit_right = 945
 limit_bottom = 415
 
+[node name="jump_VE" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-4, 1)
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.55
+randomness = 1.0
+lifetime_randomness = 0.42
+emission_shape = 3
+emission_rect_extents = Vector2(15, 2)
+spread = 62.75
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")
 player_node = NodePath("..")
