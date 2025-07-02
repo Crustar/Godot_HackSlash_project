@@ -2,8 +2,11 @@ extends PlayerState
 
 const speed_mod = 0.1
 
+var facing : int
+
 func enter() -> void:
 	super()
+	facing = animation.sprite.scale.x
 	animation.play("attacking")
 	print_debug("entering ATTACKING state")
 
@@ -12,14 +15,17 @@ func exit() -> void:
 	pass
 
 func frame_update(delta: float) -> void:
-	var direction := Input.get_axis("left", "right")
-	animation.flip_sprite(direction)
+	pass
+	#var direction := Input.get_axis("left", "right")
+	#animation.flip_sprite(direction)
 
 func physics_update(delta: float) -> void:
 	# Physic logic
 	var direction := Input.get_axis("left", "right")
-	player.velocity.x = move_toward(player.velocity.x, player.SPEED * speed_mod * direction, player.ACCELERATION * delta)
-		
+	if facing == direction:
+		player.velocity.x = move_toward(player.velocity.x, player.SPEED * speed_mod * direction, player.ACCELERATION * delta)
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, player.FRICTION * delta)	
 	player.velocity += player.get_gravity() * delta
 	player.move_and_slide()
 	
