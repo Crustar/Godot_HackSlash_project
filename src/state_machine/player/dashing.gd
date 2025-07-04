@@ -5,15 +5,14 @@ var base_velocity = 0
 @onready var dash_duration: Timer = $dash_duration
 @onready var sprite: Sprite2D = %Sprite
 
+
 func enter() -> void:
 	super()
 	base_velocity = abs(player.velocity.x)
 	dash_direction = sign(Input.get_axis("left", "right"))
 	if dash_direction == 0: # fallback
-		if sprite.flip_h :
-			dash_direction =  -1
-		else:
-			dash_direction = 1
+		dash_direction = sprite.scale.x
+			
 	dash_duration.start()
 	animation.play("dashing")
 	print_debug("entering DASHING state")

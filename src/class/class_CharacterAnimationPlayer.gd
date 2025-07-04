@@ -8,9 +8,9 @@ extends AnimationPlayer
 func flip_sprite (dir: int):
 	match dir:
 		1:
-			sprite.scale.x = 1
+			sprite.flip_scale(dir)
 		-1:
-			sprite.scale.x = -1
+			sprite.flip_scale(dir)
 		0:
 			pass
 		_:

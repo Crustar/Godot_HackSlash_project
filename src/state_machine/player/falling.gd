@@ -1,5 +1,6 @@
 extends PlayerState
 
+@onready var jump_ve: CPUParticles2D = %jump_VE
 
 func enter() -> void:
 	super()
@@ -41,7 +42,7 @@ func on_player_event(event: String) :
 			if player.jump_count < player.max_jump:
 				player.velocity.y = - player.JUMP_VELOCITY
 				player.jump_count += 1
-				print_debug("double jump")
+				jump_ve.emitting = true
 				Transition.emit(self,"jumping")
 		"dash":
 			if player.dash_count < player.max_dash :
