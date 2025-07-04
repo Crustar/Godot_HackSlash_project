@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cte27er104gl2"]
+
+[ext_resource type="AudioStream" uid="uid://do68jk35wmxq6" path="res://asset/sound_effect/15_human_dash_1.wav" id="1_qa51o"]
+[ext_resource type="AudioStream" uid="uid://hnuaov5f8gpp" path="res://asset/sound_effect/15_human_dash_2.wav" id="2_i7svf"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qyo55"]
+streams_count = 2
+stream_0/stream = ExtResource("1_qa51o")
+stream_1/stream = ExtResource("2_i7svf")
+
+[node name="dashing_sound" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_qyo55")

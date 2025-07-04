@@ -8,6 +8,7 @@ func enter() -> void:
 	super()
 	facing = animation.sprite.scale.x
 	animation.play("attacking")
+	player.play_attack_sound()
 	print_debug("entering ATTACKING state")
 
 func exit() -> void:

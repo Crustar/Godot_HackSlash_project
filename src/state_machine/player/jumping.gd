@@ -6,6 +6,7 @@ func enter() -> void:
 	super()
 	
 	animation.play("jumping")
+	player.play_jump_sound()
 	
 	print_debug("entering JUMPING state")
 
@@ -46,6 +47,7 @@ func on_player_event(event: String) :
 				player.velocity.y = - player.JUMP_VELOCITY
 				player.jump_count += 1
 				jump_ve.emitting = true
+				player.play_jump_sound()
 				print_debug("double jump")
 		"dash":
 			if player.dash_count < player.max_dash :

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@onready var dashing_sound: AudioStreamPlayer2D = $dashing_sound
+@onready var jump_sound: AudioStreamPlayer2D = $jump_sound
+@onready var attack_sound: AudioStreamPlayer2D = $attack_sound
 
 
 const SPEED = 300.0
@@ -42,3 +45,17 @@ func _process(delta: float) -> void:
 	elif direction == 1 and last_direction != 1:
 		player_event.emit("right")	
 	last_direction = direction
+
+func play_jump_sound():
+	jump_sound.stop()
+	jump_sound.play()
+	
+func play_dash_sound():
+	dashing_sound.stop()
+	dashing_sound.play()
+	
+func play_attack_sound():
+	pass
+	#attack_sound.stop()
+	#attack_sound.play()
+	

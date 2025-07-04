@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=31 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
 [ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
 [ext_resource type="Texture2D" uid="uid://btsaacjxujrm6" path="res://asset/player_sprite/Attack_KG_1.png" id="7_wlj80"]
+[ext_resource type="PackedScene" uid="uid://c67ugypirqnrk" path="res://src/sound_player/jumping_sound.tscn" id="10_hrerp"]
+[ext_resource type="PackedScene" uid="uid://cte27er104gl2" path="res://src/sound_player/dashing_sound.tscn" id="10_oyld2"]
+[ext_resource type="PackedScene" uid="uid://cd4oig7oiu6jj" path="res://src/sound_player/attack_sound.tscn" id="10_vwsmr"]
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
 [ext_resource type="Script" uid="uid://c4arvahxckmcg" path="res://src/state_machine/player/attacking.gd" id="14_rl62b"]
 
@@ -112,6 +115,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("attack_sound:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hrerp"]
 resource_name = "attacking"
@@ -187,6 +202,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("attack_sound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_rl62b"]
@@ -545,6 +572,13 @@ autoplay = "idling"
 script = ExtResource("6_ylhto")
 sprite = NodePath("../Sprite")
 metadata/_custom_type_script = "uid://bu1x4j5ovdkc2"
+
+[node name="attack_sound" parent="." instance=ExtResource("10_vwsmr")]
+
+[node name="dashing_sound" parent="." instance=ExtResource("10_oyld2")]
+
+[node name="jump_sound" parent="." instance=ExtResource("10_hrerp")]
+position = Vector2(1, -32)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -73
