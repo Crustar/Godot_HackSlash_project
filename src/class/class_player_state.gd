@@ -4,11 +4,16 @@ extends State
 var player: CharacterBody2D
 var animation : CharacterAnimationPlayer 
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	player.player_event.connect(on_player_event)
+	player.receive_hit.connect(on_player_hit)
 
 func exit() -> void:
 	player.player_event.disconnect(on_player_event)	
+	player.receive_hit.disconnect(on_player_hit)
 
 func on_player_event(event: String) :
+	pass
+
+func on_player_hit(hit_pos: Vector2):
 	pass

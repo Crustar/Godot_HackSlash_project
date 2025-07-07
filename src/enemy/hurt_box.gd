@@ -4,10 +4,8 @@ extends Area2D
 
 
 
-func _on_area_entered(area: Area2D) -> void:
-	print_debug(area.name)
-	if area.is_in_group("Character_attack_zone"):
-		print_debug("playing animation")
+func _on_area_entered(hitbox:Area2D):
+	if hitbox.is_in_group("Character_hit_box"):
 		animation_player.play("hurt")
 
 

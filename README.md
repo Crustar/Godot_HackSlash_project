@@ -18,7 +18,7 @@ behavior, which includes:
 
 7. Double jump
 
-8. Hurt (TODO)
+8. Hurt
 
 9. Death (TODO)
 
@@ -31,6 +31,6 @@ animation. A better solution is to be found.
 
 
 # Future todo lists
-1. add hurt state
+1. add health system
 2. add death state and gameloop
 3. working on a functional enemy

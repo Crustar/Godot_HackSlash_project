@@ -1,7 +1,7 @@
 extends PlayerState
 
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	super()
 	
 	player.jump_count = 0
@@ -54,4 +54,7 @@ func on_player_event(event: String) :
 			Transition.emit(self,"attacking")
 		_:
 			pass
+	
+func on_player_hit(hit_pos: Vector2):
+	Transition.emit(self,"hurt",{"pos":hit_pos}	)
 	

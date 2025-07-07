@@ -22,7 +22,8 @@ window/size/viewport_height=360
 
 [global_group]
 
-Character_attack_zone=""
+Character_hit_box=""
+Enemy_hit_box=""
 
 [input]
 

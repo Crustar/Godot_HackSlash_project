@@ -3,7 +3,7 @@ extends Node
 
 signal Transition
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	pass
 
 func exit() -> void:

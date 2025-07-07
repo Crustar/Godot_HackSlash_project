@@ -5,6 +5,7 @@ extends Node
 @export var animation_player_node : CharacterAnimationPlayer
 var current_state: PlayerState
 var states: Dictionary = {}
+var pending_context: Dictionary = {}
 
 func _ready() -> void:
 	for child in get_children():
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 
 
-func on_state_transition(source_state:PlayerState, new_state_name:String):
+func on_state_transition(source_state:PlayerState, new_state_name:String, context:Dictionary = {}):
 	if source_state!=current_state :
 		print_debug("State passing as argument is not the current state")
 		return
@@ -47,7 +48,7 @@ func on_state_transition(source_state:PlayerState, new_state_name:String):
 	else:
 		print_debug("State machine's current state is lost")
 	
-	new_state.enter()
+	new_state.enter(context)
 	current_state = new_state
 	
 	

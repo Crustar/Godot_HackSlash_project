@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bcu2ii3dvgopp" path="res://asset/dummy_sprite/spritesheet.png" id="1_16l3b"]
 [ext_resource type="Texture2D" uid="uid://62ddtvj17oag" path="res://asset/dummy_sprite/Idle.png" id="1_uwpna"]
-[ext_resource type="Script" uid="uid://d00h1eohk2e71" path="res://src/enemy/hit_box.gd" id="2_uwpna"]
+[ext_resource type="Script" uid="uid://d00h1eohk2e71" path="res://src/enemy/hurt_box.gd" id="2_uwpna"]
 
 [sub_resource type="Animation" id="Animation_nccke"]
 length = 0.001
@@ -113,11 +113,11 @@ _data = {
 &"hurt": SubResource("Animation_16l3b")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwpna"]
-size = Vector2(23, 69.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16l3b"]
 size = Vector2(16, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwpna"]
+size = Vector2(23, 69.5)
 
 [node name="EnemyDummy" type="CharacterBody2D"]
 
@@ -133,18 +133,24 @@ position = Vector2(-2, -48)
 scale = Vector2(2, 2)
 texture = ExtResource("1_uwpna")
 
-[node name="HitBox" type="Area2D" parent="."]
-position = Vector2(0, -33)
-script = ExtResource("2_uwpna")
-
-[node name="hits_hape" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(1.5, -2.25)
-shape = SubResource("RectangleShape2D_uwpna")
-
-[node name="collision_shape" type="CollisionShape2D" parent="."]
-position = Vector2(1, -32.5)
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1, -32)
 shape = SubResource("RectangleShape2D_16l3b")
 disabled = true
 
-[connection signal="animation_finished" from="AnimationPlayer" to="HitBox" method="_on_animation_player_animation_finished"]
-[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -33)
+script = ExtResource("2_uwpna")
+
+[node name="Collision" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_16l3b")
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemy_hit_box"]]
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1.5, -35.25)
+shape = SubResource("RectangleShape2D_uwpna")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="HurtBox" method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]

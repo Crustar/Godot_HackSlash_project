@@ -4,7 +4,7 @@ const speed_mod = 0.1
 
 var facing : int
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	super()
 	facing = animation.sprite.scale.x
 	animation.play("attacking")
@@ -51,6 +51,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	else:
 		Transition.emit(self,"falling")
 
-
-func _on_attack_zone_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
+func on_player_hit(hit_pos: Vector2):
+	Transition.emit(self,"hurt",{"pos":hit_pos}	)

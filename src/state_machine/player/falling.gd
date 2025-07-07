@@ -2,7 +2,7 @@ extends PlayerState
 
 @onready var jump_ve: CPUParticles2D = %jump_VE
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	super()
 	animation.play("falling")
 	print_debug("entering FALLING state")
@@ -52,3 +52,6 @@ func on_player_event(event: String) :
 			Transition.emit(self,"attacking")
 		_:
 			pass
+
+func on_player_hit(hit_pos: Vector2):
+	Transition.emit(self,"hurt",{"pos":hit_pos}	)

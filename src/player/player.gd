@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var dashing_sound: AudioStreamPlayer2D = $dashing_sound
 @onready var jump_sound: AudioStreamPlayer2D = $jump_sound
 @onready var attack_sound: AudioStreamPlayer2D = $attack_sound
+@onready var hurtbox: Area2D = $Sprite/Hurtbox
 
 
 const SPEED = 300.0
@@ -11,7 +12,7 @@ const JUMP_VELOCITY = 400.0
 const MAX_SPEED = 600.0
 const MAX_JUMP_VELOCITY = 700.0
 const ACCELERATION = 700.0
-const FRICTION = 1200.0
+const FRICTION = 1400.0
 
 
 
@@ -20,9 +21,13 @@ var jump_count = 0
 var max_dash = 1
 var dash_count = 0
 
-
-
 signal player_event
+signal receive_hit
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy_hit_box"):
+		receive_hit.emit(area.global_position)
 
 var last_direction = 0
 func _process(delta: float) -> void:

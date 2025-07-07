@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=34 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -14,11 +14,13 @@
 [ext_resource type="Script" uid="uid://bu1x4j5ovdkc2" path="res://src/class/class_CharacterAnimationPlayer.gd" id="6_ylhto"]
 [ext_resource type="Script" uid="uid://d4udymj6r4jq" path="res://src/state_machine/player/running.gd" id="7_boad6"]
 [ext_resource type="Texture2D" uid="uid://btsaacjxujrm6" path="res://asset/player_sprite/Attack_KG_1.png" id="7_wlj80"]
+[ext_resource type="Texture2D" uid="uid://d3uv7udxia2i8" path="res://asset/player_sprite/Hurt_KG_2.png" id="9_hja65"]
 [ext_resource type="PackedScene" uid="uid://c67ugypirqnrk" path="res://src/sound_player/jumping_sound.tscn" id="10_hrerp"]
 [ext_resource type="PackedScene" uid="uid://cte27er104gl2" path="res://src/sound_player/dashing_sound.tscn" id="10_oyld2"]
 [ext_resource type="PackedScene" uid="uid://cd4oig7oiu6jj" path="res://src/sound_player/attack_sound.tscn" id="10_vwsmr"]
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
 [ext_resource type="Script" uid="uid://c4arvahxckmcg" path="res://src/state_machine/player/attacking.gd" id="14_rl62b"]
+[ext_resource type="Script" uid="uid://be4y1aolgcmrf" path="res://src/state_machine/player/hurt.gd" id="20_jcdrv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bm8s"]
 size = Vector2(47, 31)
@@ -82,7 +84,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/attack_zone/attack_shape_f2:disabled")
+tracks/4/path = NodePath("Sprite/Hitbox/hitboxShape_f2:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -94,7 +96,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/attack_zone/attack_shape_f3:disabled")
+tracks/5/path = NodePath("Sprite/Hitbox/hitboxShape_f3:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -182,7 +184,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/attack_zone/attack_shape_f2:disabled")
+tracks/4/path = NodePath("Sprite/Hitbox/hitboxShape_f2:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -194,7 +196,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/attack_zone/attack_shape_f3:disabled")
+tracks/5/path = NodePath("Sprite/Hitbox/hitboxShape_f3:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -332,6 +334,58 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_5shm8"]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_hja65")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_yllr7"]
@@ -501,6 +555,7 @@ _data = {
 &"attacking": SubResource("Animation_hrerp"),
 &"dashing": SubResource("Animation_rl62b"),
 &"falling": SubResource("Animation_tqiix"),
+&"hurt": SubResource("Animation_5shm8"),
 &"idling": SubResource("Animation_yllr7"),
 &"jumping": SubResource("Animation_32hag"),
 &"running": SubResource("Animation_wodsf")
@@ -547,18 +602,24 @@ emission_rect_extents = Vector2(4, 30)
 gravity = Vector2(-980, 0)
 scale_amount_max = 2.0
 
-[node name="attack_zone" type="Area2D" parent="Sprite" groups=["Character_attack_zone"]]
+[node name="Hitbox" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
 position = Vector2(0.5, 2)
 
-[node name="attack_shape_f2" type="CollisionShape2D" parent="Sprite/attack_zone"]
+[node name="hitboxShape_f2" type="CollisionShape2D" parent="Sprite/Hitbox"]
 position = Vector2(29, -13)
 shape = SubResource("RectangleShape2D_6bm8s")
 disabled = true
 
-[node name="attack_shape_f3" type="CollisionShape2D" parent="Sprite/attack_zone"]
+[node name="hitboxShape_f3" type="CollisionShape2D" parent="Sprite/Hitbox"]
 position = Vector2(34, 10)
 shape = SubResource("RectangleShape2D_wlj80")
 disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="Sprite"]
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="Sprite/Hurtbox"]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_2smqc")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -30)
@@ -617,6 +678,11 @@ one_shot = true
 script = ExtResource("14_rl62b")
 metadata/_custom_type_script = "uid://p8ksei017jna"
 
-[connection signal="area_entered" from="Sprite/attack_zone" to="state_machine/attacking" method="_on_attack_zone_area_entered"]
+[node name="hurt" type="Node" parent="state_machine"]
+script = ExtResource("20_jcdrv")
+metadata/_custom_type_script = "uid://p8ksei017jna"
+
+[connection signal="area_entered" from="Sprite/Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state_machine/attacking" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="state_machine/hurt" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]

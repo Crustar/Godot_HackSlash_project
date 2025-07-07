@@ -6,7 +6,7 @@ var base_velocity = 0
 @onready var sprite: Sprite2D = %Sprite
 
 
-func enter() -> void:
+func enter(context:Dictionary = {}) -> void:
 	super()
 	base_velocity = abs(player.velocity.x)
 	dash_direction = sign(Input.get_axis("left", "right"))
@@ -57,3 +57,6 @@ func _on_dash_cooldown_timeout() -> void:
 			Transition.emit(self,"idling")
 	else:
 		Transition.emit(self,"falling")
+
+func on_player_hit(hit_pos: Vector2):
+	Transition.emit(self,"hurt",{"pos":hit_pos}	)
