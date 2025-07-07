@@ -1,12 +1,15 @@
-[gd_scene load_steps=34 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=40 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://btpf0su1u2vk6" path="res://src/player/player_health.gd" id="2_4uy46"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
 [ext_resource type="Script" uid="uid://3jnapg13wwfs" path="res://src/player/sprite.gd" id="3_6bm8s"]
 [ext_resource type="Texture2D" uid="uid://d2h2k6jp0iv31" path="res://asset/player_sprite/Walking_KG_2.png" id="3_8t03j"]
 [ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://src/state_machine/state_machine.tscn" id="3_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dojlaqus2hxqb" path="res://asset/player_sprite/Jump_KG_2.png" id="4_2ieo8"]
+[ext_resource type="Script" uid="uid://c17m3rqfcagq5" path="res://src/class/class_HitBox.gd" id="4_5efpn"]
 [ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://src/state_machine/player/idling.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://dyoqdgu3nnjjx" path="res://src/class/class_HurtBox.gd" id="5_4uy46"]
 [ext_resource type="Texture2D" uid="uid://cf0gnv5f8p6q7" path="res://asset/player_sprite/Fall_KG_2.png" id="5_ebec5"]
 [ext_resource type="Script" uid="uid://bjyvw7vluxeet" path="res://src/state_machine/player/jumping.gd" id="5_g6k8r"]
 [ext_resource type="Texture2D" uid="uid://b3fkani0umoew" path="res://asset/player_sprite/Dashing_KG_1.png" id="6_2smqc"]
@@ -19,8 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://cte27er104gl2" path="res://src/sound_player/dashing_sound.tscn" id="10_oyld2"]
 [ext_resource type="PackedScene" uid="uid://cd4oig7oiu6jj" path="res://src/sound_player/attack_sound.tscn" id="10_vwsmr"]
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
+[ext_resource type="Texture2D" uid="uid://d2cm6dyl7ibam" path="res://asset/player_sprite/Dying_KG_2.png" id="13_a4vah"]
 [ext_resource type="Script" uid="uid://c4arvahxckmcg" path="res://src/state_machine/player/attacking.gd" id="14_rl62b"]
 [ext_resource type="Script" uid="uid://be4y1aolgcmrf" path="res://src/state_machine/player/hurt.gd" id="20_jcdrv"]
+[ext_resource type="Script" uid="uid://bsiumn8bx4bt7" path="res://src/player/dead.gd" id="25_k60ra"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bm8s"]
 size = Vector2(47, 31)
@@ -549,11 +554,64 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_vwi60"]
+resource_name = "dead"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_a4vah")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7oew"]
 _data = {
 &"RESET": SubResource("Animation_kb6p2"),
 &"attacking": SubResource("Animation_hrerp"),
 &"dashing": SubResource("Animation_rl62b"),
+&"dead": SubResource("Animation_vwi60"),
 &"falling": SubResource("Animation_tqiix"),
 &"hurt": SubResource("Animation_5shm8"),
 &"idling": SubResource("Animation_yllr7"),
@@ -563,6 +621,11 @@ _data = {
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("2_4uy46")
+body = NodePath("..")
+metadata/_custom_type_script = "uid://b4xupn1gmo05f"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -604,6 +667,8 @@ scale_amount_max = 2.0
 
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
 position = Vector2(0.5, 2)
+script = ExtResource("4_5efpn")
+metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="hitboxShape_f2" type="CollisionShape2D" parent="Sprite/Hitbox"]
 position = Vector2(29, -13)
@@ -616,6 +681,9 @@ shape = SubResource("RectangleShape2D_wlj80")
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="Sprite"]
+script = ExtResource("5_4uy46")
+health = 3.0
+metadata/_custom_type_script = "uid://dyoqdgu3nnjjx"
 
 [node name="HurtboxShape" type="CollisionShape2D" parent="Sprite/Hurtbox"]
 position = Vector2(1, 2)
@@ -682,7 +750,9 @@ metadata/_custom_type_script = "uid://p8ksei017jna"
 script = ExtResource("20_jcdrv")
 metadata/_custom_type_script = "uid://p8ksei017jna"
 
+[node name="dead" type="Node" parent="state_machine"]
+script = ExtResource("25_k60ra")
+metadata/_custom_type_script = "uid://p8ksei017jna"
+
 [connection signal="area_entered" from="Sprite/Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="state_machine/attacking" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="state_machine/hurt" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]

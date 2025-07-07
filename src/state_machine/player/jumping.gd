@@ -58,5 +58,6 @@ func on_player_event(event: String) :
 		_:
 			pass
 	
-func on_player_hit(hit_pos: Vector2):
-	Transition.emit(self,"hurt",{"pos":hit_pos}	)
+func on_player_hit(context: Dictionary):
+	if player.invulnerable == false:
+		Transition.emit(self,"hurt",context	)

@@ -20,7 +20,7 @@ behavior, which includes:
 
 8. Hurt
 
-9. Death (TODO)
+9. Death 
 
 # Known issues
 1. The current implementation of the sound effect is not uniform in terms of method. The jumping and
@@ -31,6 +31,5 @@ animation. A better solution is to be found.
 
 
 # Future todo lists
-1. add health system
-2. add death state and gameloop
-3. working on a functional enemy
+1. Add a fade to black upon character death
+2. working on a functional enemy

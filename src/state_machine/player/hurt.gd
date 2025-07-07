@@ -8,15 +8,16 @@ var direction
 
 func enter(context:Dictionary = {}) -> void:
 	super()
-	animation.play("hurt")
-	player.velocity.x = 0
-	#player.play_attack_sound()
 	
+	player.velocity.x = 0
 	hit_source_pos = context.get("pos",null)
 	if hit_source_pos == null:
 		print_debug("Error: can't identify hit source")
 	direction = signf(player.global_position.x - hit_source_pos.x)
 	sprite.scale.x = -direction
+	player.invulnerable = true
+	
+	animation.play("hurt")
 	print_debug("entering HURT state")
 
 func exit() -> void:
@@ -51,13 +52,16 @@ func on_player_event(event: String) :
 			pass
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print_debug("Hurt Animation Finished")
-	var direction := Input.get_axis("left", "right")
-	if player.is_on_floor(): 
-		if direction: 
-			Transition.emit(self,"running")
-		else: 
-			Transition.emit(self,"idling")
+func on_animation_finished(anim_name: StringName) -> void:
+	if player.is_dead:
+		Transition.emit(self,"dead")
 	else:
-		Transition.emit(self,"falling")
+		player.invulnerable = false
+		var direction := Input.get_axis("left", "right")
+		if player.is_on_floor(): 
+			if direction: 
+				Transition.emit(self,"running")
+			else: 
+				Transition.emit(self,"idling")
+		else:
+			Transition.emit(self,"falling")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://djdhyunyv8025"]
+[gd_scene load_steps=10 format=3 uid="uid://djdhyunyv8025"]
 
 [ext_resource type="Texture2D" uid="uid://bcu2ii3dvgopp" path="res://asset/dummy_sprite/spritesheet.png" id="1_16l3b"]
 [ext_resource type="Texture2D" uid="uid://62ddtvj17oag" path="res://asset/dummy_sprite/Idle.png" id="1_uwpna"]
 [ext_resource type="Script" uid="uid://d00h1eohk2e71" path="res://src/enemy/hurt_box.gd" id="2_uwpna"]
+[ext_resource type="Script" uid="uid://c17m3rqfcagq5" path="res://src/class/class_HitBox.gd" id="4_nccke"]
 
 [sub_resource type="Animation" id="Animation_nccke"]
 length = 0.001
@@ -141,12 +142,16 @@ disabled = true
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -33)
 script = ExtResource("2_uwpna")
+metadata/_custom_type_script = "uid://dyoqdgu3nnjjx"
 
 [node name="Collision" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_16l3b")
 
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy_hit_box"]]
+script = ExtResource("4_nccke")
+damage = 1.0
+metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(1.5, -35.25)

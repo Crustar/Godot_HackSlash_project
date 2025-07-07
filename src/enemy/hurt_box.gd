@@ -1,4 +1,4 @@
-extends Area2D
+extends HurtBox
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 

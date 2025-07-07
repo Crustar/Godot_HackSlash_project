@@ -41,7 +41,7 @@ func on_player_event(event: String) :
 			pass
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func on_animation_finished(anim_name: StringName) -> void:
 	var direction := Input.get_axis("left", "right")
 	if player.is_on_floor(): 
 		if direction: 
@@ -51,5 +51,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	else:
 		Transition.emit(self,"falling")
 
-func on_player_hit(hit_pos: Vector2):
-	Transition.emit(self,"hurt",{"pos":hit_pos}	)
+func on_player_hit(context: Dictionary):
+	if player.invulnerable == false:
+		Transition.emit(self,"hurt",context	)

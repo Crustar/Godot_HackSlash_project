@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func on_state_transition(source_state:PlayerState, new_state_name:String, context:Dictionary = {}):
 	if source_state!=current_state :
-		print_debug("State passing as argument is not the current state")
+		print_debug("State passing as argument is not the current state: source state = " + source_state.name + " current state = " + current_state.name )
 		return
 		
 	var new_state : PlayerState = states.get(new_state_name.to_lower())
