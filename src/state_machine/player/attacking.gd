@@ -8,7 +8,7 @@ func enter(context:Dictionary = {}) -> void:
 	super()
 	facing = animation.sprite.scale.x
 	animation.play("attacking")
-	player.play_attack_sound()
+	AudioController.play_attack_sound(0.1)
 	print_debug("entering ATTACKING state")
 
 func exit() -> void:

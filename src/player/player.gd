@@ -71,18 +71,4 @@ func on_death_occure():
 
 
 
-
-
-func play_jump_sound():
-	jump_sound.stop()
-	jump_sound.play()
-	
-func play_dash_sound():
-	dashing_sound.stop()
-	dashing_sound.play()
-	
-func play_attack_sound():
-	pass
-	#attack_sound.stop()
-	#attack_sound.play()
 	

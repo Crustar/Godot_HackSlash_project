@@ -1,6 +1,6 @@
 extends Camera2D
 
-@onready var fade_black: Node = $"../FadeBlack"
+@onready var fade_black: Node = $FadeBlack
 @onready var player: CharacterBody2D = $".."
 
 func _ready() -> void:
