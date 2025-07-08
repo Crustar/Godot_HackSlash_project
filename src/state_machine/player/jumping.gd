@@ -48,7 +48,6 @@ func on_player_event(event: String) :
 				player.jump_count += 1
 				jump_ve.emitting = true
 				player.play_jump_sound()
-				print_debug("double jump")
 		"dash":
 			if player.dash_count < player.max_dash :
 				player.dash_count += 1

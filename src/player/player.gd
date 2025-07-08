@@ -23,7 +23,6 @@ var max_dash = 1
 var dash_count = 0
 
 
-
 var is_dead = false
 var invulnerable = false
 
@@ -31,12 +30,17 @@ var invulnerable = false
 
 signal player_event
 signal receive_hit
+signal death_occure
+
 
 ## TODO : change Area2D to HitBox, maybe manually connect?
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy_hit_box"):
 		receive_hit.emit({"pos":area.global_position})
 		health.damage_taken(area.damage)
+
+func _ready() -> void:
+	death_occure.connect(on_death_occure)
 
 var last_direction = 0
 func _process(delta: float) -> void:
@@ -59,6 +63,15 @@ func _process(delta: float) -> void:
 	elif direction == 1 and last_direction != 1:
 		player_event.emit("right")	
 	last_direction = direction
+
+
+
+func on_death_occure():
+	get_tree().reload_current_scene()
+
+
+
+
 
 func play_jump_sound():
 	jump_sound.stop()

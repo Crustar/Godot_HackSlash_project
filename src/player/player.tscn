@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=42 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://btpf0su1u2vk6" path="res://src/player/player_health.gd" id="2_4uy46"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" uid="uid://dlytgiqbaje06" path="res://src/state_machine/player/dashing.gd" id="12_cwolq"]
 [ext_resource type="Texture2D" uid="uid://d2cm6dyl7ibam" path="res://asset/player_sprite/Dying_KG_2.png" id="13_a4vah"]
 [ext_resource type="Script" uid="uid://c4arvahxckmcg" path="res://src/state_machine/player/attacking.gd" id="14_rl62b"]
+[ext_resource type="Script" uid="uid://6pokw7l256mv" path="res://src/player/camera.gd" id="18_o04tx"]
+[ext_resource type="PackedScene" uid="uid://cj2kr6d8txp2l" path="res://src/Interface/fade_black.tscn" id="18_vwi60"]
 [ext_resource type="Script" uid="uid://be4y1aolgcmrf" path="res://src/state_machine/player/hurt.gd" id="20_jcdrv"]
 [ext_resource type="Script" uid="uid://bsiumn8bx4bt7" path="res://src/player/dead.gd" id="25_k60ra"]
 
@@ -285,6 +287,58 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vwi60"]
+resource_name = "dead"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_a4vah")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
 }
 
 [sub_resource type="Animation" id="Animation_tqiix"]
@@ -554,58 +608,6 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
-[sub_resource type="Animation" id="Animation_vwi60"]
-resource_name = "dead"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("13_a4vah")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 5]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7oew"]
 _data = {
 &"RESET": SubResource("Animation_kb6p2"),
@@ -709,11 +711,14 @@ metadata/_custom_type_script = "uid://bu1x4j5ovdkc2"
 [node name="jump_sound" parent="." instance=ExtResource("10_hrerp")]
 position = Vector2(1, -32)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="FadeBlack" parent="." instance=ExtResource("18_vwi60")]
+
+[node name="Camera" type="Camera2D" parent="."]
 limit_left = -73
 limit_top = 0
 limit_right = 945
 limit_bottom = 415
+script = ExtResource("18_o04tx")
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")

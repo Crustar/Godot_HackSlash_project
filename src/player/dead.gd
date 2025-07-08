@@ -1,5 +1,6 @@
 extends PlayerState
 
+@onready var camera: Camera2D = $"../../Camera"
 
 
 func enter(context:Dictionary = {}) -> void:
@@ -34,4 +35,4 @@ func on_player_event(event: String) :
 
 
 func on_animation_finished(anim_name: StringName) -> void:
-	get_tree().reload_current_scene()
+	camera.fade_to_black()
