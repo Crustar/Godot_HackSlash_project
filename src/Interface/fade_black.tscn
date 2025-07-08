@@ -56,19 +56,16 @@ _data = {
 &"fade_to_bright": SubResource("Animation_i1ord")
 }
 
-[node name="FadeBlack" type="Node"]
+[node name="FadeBlack" type="CanvasLayer"]
 script = ExtResource("1_ncxgj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -324.0
-offset_top = -295.0
-offset_right = 319.0
-offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

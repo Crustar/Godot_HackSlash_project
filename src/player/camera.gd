@@ -1,9 +1,10 @@
 extends Camera2D
 
-@onready var fade_black: Node = $FadeBlack
+@onready var fade_black: CanvasLayer = $FadeBlack
 @onready var player: CharacterBody2D = $".."
 
 func _ready() -> void:
+	fade_black.visible = true
 	fade_black.fade_to_bright()
 	fade_black.fading_finished.connect(on_animation_finished)
 
