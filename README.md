@@ -23,13 +23,9 @@ behavior, which includes:
 9. Death 
 
 # Known issues
-1. The current implementation of the sound effect is not uniform in terms of method. The jumping and
-dashing sound is played with a callback of a playsound function in player node, while the attacking
-sound is played by using the animation player. The reason is that the jumping sound need to be overlapped
-if pressed in quick succession while the attack sound should be played with a slight delay to fit the
-animation. A better solution is to be found.
+
 
 
 # Future todo lists
-1. Add a fade to black upon character death
-2. working on a functional enemy
+1. working on a functional enemy
+2. have the camera's limit been dynamycally set
