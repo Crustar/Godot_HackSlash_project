@@ -2,6 +2,7 @@ extends PlayerState
 
 @export var can_input: bool= false
 
+
 const speed_mod = 0.1
 
 var facing : int
@@ -9,9 +10,9 @@ var facing : int
 func enter(context:Dictionary = {}) -> void:
 	super()
 	facing = animation.sprite.scale.x
-	animation.play("attacking")
-	AudioController.play_sound("Attack",0.1)
-	print_debug("entering ATTACKING state")
+	animation.play("attacking3")
+	AudioController.play_sound("Attack",0.3)
+	print_debug("entering ATTACKING COMBO 3 state")
 
 func exit() -> void:
 	super()
@@ -49,8 +50,6 @@ func on_player_event(event: String) :
 				if player.dash_count < player.max_dash :
 					player.dash_count += 1
 					Transition.emit(self,"dashing")
-			"attack":
-				Transition.emit(self,"attacking2")
 			_:
 				pass
 

@@ -6,7 +6,7 @@ func enter(context:Dictionary = {}) -> void:
 	super()
 	
 	animation.play("jumping")
-	AudioController.play_jump_sound()
+	AudioController.play_sound("Jump")
 	
 	print_debug("entering JUMPING state")
 
@@ -47,7 +47,7 @@ func on_player_event(event: String) :
 				player.velocity.y = - player.JUMP_VELOCITY
 				player.jump_count += 1
 				jump_ve.emitting = true
-				AudioController.play_jump_sound()
+				AudioController.play_sound("Jump")
 		"dash":
 			if player.dash_count < player.max_dash :
 				player.dash_count += 1

@@ -22,7 +22,7 @@ func frame_update(delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.PATROL_SPEED * direction, enemy.ACCELERATION * delta)
+	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.SPEED * direction, enemy.ACCELERATION * delta)
 	
 	enemy.velocity += enemy.get_gravity() * delta	
 	enemy.move_and_slide()

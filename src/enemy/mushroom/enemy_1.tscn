@@ -349,7 +349,7 @@ shape = SubResource("RectangleShape2D_xxr47")
 [node name="Hurtbox" type="Area2D" parent="Sprite"]
 position = Vector2(0, 16)
 script = ExtResource("2_cmofg")
-health = 2.0
+health = 6.0
 metadata/_custom_type_script = "uid://dyoqdgu3nnjjx"
 
 [node name="HurtboxShape" type="CollisionShape2D" parent="Sprite/Hurtbox"]

@@ -15,7 +15,7 @@ func enter(context:Dictionary = {}) -> void:
 			
 	dash_duration.start()
 	animation.play("dashing")
-	AudioController.play_dash_sound()
+	AudioController.play_sound("Dash")
 	print_debug("entering DASHING state")
 
 func exit() -> void:
