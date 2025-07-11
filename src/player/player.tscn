@@ -206,6 +206,18 @@ tracks/12/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sprite:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_hrerp"]
 resource_name = "attacking"
@@ -529,6 +541,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0.0166664, 1), Color(1, 0, 0.0166664, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_yllr7"]
 resource_name = "idle"
@@ -774,7 +798,7 @@ tracks/6/path = NodePath("state_machine/attacking2:can_input")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -860,7 +884,7 @@ _data = {
 &"running": SubResource("Animation_wodsf")
 }
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Player_body"]]
 script = ExtResource("1_rkbax")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -907,7 +931,6 @@ gravity = Vector2(-980, 0)
 scale_amount_max = 2.0
 
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
-visible = false
 position = Vector2(0.5, 2)
 script = ExtResource("4_5efpn")
 damage = 1.0
@@ -924,9 +947,9 @@ shape = SubResource("RectangleShape2D_wlj80")
 disabled = true
 
 [node name="Hitbox2" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
-visible = false
 script = ExtResource("4_5efpn")
 damage = 1.0
+knock_back_power = 0.5
 metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="hitboxShape_f3" type="CollisionShape2D" parent="Sprite/Hitbox2"]
@@ -942,6 +965,7 @@ disabled = true
 [node name="Hitbox3" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
 script = ExtResource("4_5efpn")
 damage = 2.0
+knock_back_power = 2.0
 metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="hitboxShape_f4" type="CollisionShape2D" parent="Sprite/Hitbox3"]
@@ -950,6 +974,7 @@ shape = SubResource("RectangleShape2D_wcxbk")
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="Sprite"]
+visible = false
 script = ExtResource("5_4uy46")
 health = 3.0
 metadata/_custom_type_script = "uid://dyoqdgu3nnjjx"
@@ -959,6 +984,7 @@ position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_2smqc")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.5, -30)
 shape = SubResource("RectangleShape2D_2smqc")
 
@@ -1034,5 +1060,4 @@ metadata/_custom_type_script = "uid://p8ksei017jna"
 script = ExtResource("25_k60ra")
 metadata/_custom_type_script = "uid://p8ksei017jna"
 
-[connection signal="area_entered" from="Sprite/Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="state_machine/dashing/dash_duration" to="state_machine/dashing" method="_on_dash_cooldown_timeout"]

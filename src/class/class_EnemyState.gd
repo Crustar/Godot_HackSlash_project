@@ -15,6 +15,7 @@ func on_got_hit(context: Dictionary):
 	if enemy.invulnerable == false:
 		Transition.emit(self,"hurt",context)
 		enemy.invulnerable = true
+
 	
 func on_animation_finished(anim_name: StringName):
 	pass

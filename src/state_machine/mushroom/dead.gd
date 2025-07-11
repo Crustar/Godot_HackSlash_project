@@ -4,6 +4,7 @@ func enter(context:Dictionary = {}) -> void:
 	super()
 	enemy.velocity.x = 0
 	enemy.toggle_collision(false)
+	enemy.toggle_attack(false)
 	animation.play("dead")
 
 

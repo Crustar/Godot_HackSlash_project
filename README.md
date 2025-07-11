@@ -29,5 +29,4 @@ behavior, which includes:
 # Future todo lists
 1. working on a functional enemy
 1.1 Add a tracking logic to the enemy
-2. Add combo combat system
-3. have the camera's limit been dynamycally set
+2. have the camera's limit been dynamycally set

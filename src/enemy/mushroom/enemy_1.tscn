@@ -320,7 +320,7 @@ _data = {
 &"running": SubResource("Animation_vm764")
 }
 
-[node name="Mushroom" type="CharacterBody2D"]
+[node name="Mushroom" type="CharacterBody2D" groups=["Enemy_body"]]
 script = ExtResource("1_n6v3k")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -337,6 +337,7 @@ hframes = 7
 script = ExtResource("4_4d3q0")
 
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Enemy_hit_box"]]
+visible = false
 position = Vector2(0, 16)
 script = ExtResource("3_ai7er")
 damage = 1.0
@@ -347,9 +348,10 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_xxr47")
 
 [node name="Hurtbox" type="Area2D" parent="Sprite"]
+visible = false
 position = Vector2(0, 16)
 script = ExtResource("2_cmofg")
-health = 6.0
+health = 4.0
 metadata/_custom_type_script = "uid://dyoqdgu3nnjjx"
 
 [node name="HurtboxShape" type="CollisionShape2D" parent="Sprite/Hurtbox"]
@@ -357,6 +359,7 @@ shape = SubResource("RectangleShape2D_nji5j")
 
 [node name="RayCastDown" type="RayCast2D" parent="Sprite"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(9, 23)
 target_position = Vector2(0, 14)
 
@@ -400,6 +403,5 @@ metadata/_custom_type_script = "uid://dtdx8lsx307qk"
 script = ExtResource("15_7rgtk")
 metadata/_custom_type_script = "uid://dtdx8lsx307qk"
 
-[connection signal="area_entered" from="Sprite/Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="enemy_state_machine/idling/IdleTimer" to="enemy_state_machine/idling" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="enemy_state_machine/patrolling/PatrolTimer" to="enemy_state_machine/patrolling" method="_on_patrol_timer_timeout"]

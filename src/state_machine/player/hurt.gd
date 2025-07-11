@@ -4,6 +4,7 @@ extends PlayerState
 
 var hit_source_pos: Vector2
 var knock_back_speed := 150
+var knock_back_power : float
 var direction
 
 func enter(context:Dictionary = {}) -> void:
@@ -11,8 +12,11 @@ func enter(context:Dictionary = {}) -> void:
 	
 	player.velocity.x = 0
 	hit_source_pos = context.get("pos",null)
+	knock_back_power = context.get("knock_back_power",-1)
 	if hit_source_pos == null:
-		print_debug("Error: can't identify hit source")
+		print_debug("Error: can't identify hit source's position")
+	if knock_back_power == -1:
+		print_debug("Error: can't identify hit source's power")
 	direction = signf(player.global_position.x - hit_source_pos.x)
 	sprite.scale.x = -direction
 	player.invulnerable = true
@@ -35,7 +39,7 @@ func physics_update(delta: float) -> void:
 	var direction := signf(player.global_position.x - hit_source_pos.x)
 	if direction == 0:
 		direction = 1
-	player.velocity.x = move_toward(player.velocity.x, knock_back_speed * direction, player.ACCELERATION * delta)
+	player.velocity.x = move_toward(player.velocity.x, knock_back_speed * direction * knock_back_power, player.ACCELERATION * delta)
 	
 
 	player.velocity += player.get_gravity() * delta
@@ -65,3 +69,6 @@ func on_animation_finished(anim_name: StringName) -> void:
 				Transition.emit(self,"idling")
 		else:
 			Transition.emit(self,"falling")
+
+func on_player_hit(context: Dictionary):
+	super(context)

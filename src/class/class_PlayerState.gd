@@ -17,7 +17,10 @@ func on_player_event(event: String) :
 	pass
 
 func on_player_hit(context: Dictionary):
-	pass
-	
+	if player.invulnerable == false:
+		Transition.emit(self,"hurt",context)
+		player.invulnerable = true
+
+
 func on_animation_finished(anim_name: StringName):
 	pass

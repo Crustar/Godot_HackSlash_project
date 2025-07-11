@@ -59,5 +59,4 @@ func _on_dash_cooldown_timeout() -> void:
 		Transition.emit(self,"falling")
 
 func on_player_hit(context: Dictionary):
-	if player.invulnerable == false:
-		Transition.emit(self,"hurt",context	)
+	super(context)

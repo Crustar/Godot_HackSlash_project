@@ -23,20 +23,17 @@ func _ready() -> void:
 	death_occurred.connect(on_death_occurred)
 	
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Character_hit_box") and !invulnerable:
-		receive_hit.emit({"pos":area.global_position})
-		health.damage_taken(area.damage)
 
 func on_death_occurred():
 	self.queue_free()
 
-## TODO: currently turn this on will cause the enemy to fall through the ground
+
 func toggle_collision(val: bool):
-	velocity = Vector2(0,0)
-	$Collision.disabled = true
+	velocity = Vector2.ZERO
+	$Collision.set_deferred("disabled",!val)
 
 func toggle_attack(val: bool):
 	for child in hitbox.get_children():
 		if child is CollisionShape2D :
-			child.disabled = val
+			child.set_deferred("disabled",!val)
+			

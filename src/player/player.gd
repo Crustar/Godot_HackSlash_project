@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
-@onready var dashing_sound: AudioStreamPlayer2D = $dashing_sound
-@onready var jump_sound: AudioStreamPlayer2D = $jump_sound
-@onready var attack_sound: AudioStreamPlayer2D = $attack_sound
+
 @onready var hurtbox: Area2D = $Sprite/Hurtbox
 @onready var health: Health = $Health
 
@@ -33,11 +31,6 @@ signal receive_hit
 signal death_occurred
 
 
-## TODO : change Area2D to HitBox, maybe manually connect?
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Enemy_hit_box"):
-		receive_hit.emit({"pos":area.global_position})
-		health.damage_taken(area.damage)
 
 func _ready() -> void:
 	death_occurred.connect(on_death_occurred)

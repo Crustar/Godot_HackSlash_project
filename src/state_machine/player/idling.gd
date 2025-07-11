@@ -56,6 +56,5 @@ func on_player_event(event: String) :
 			pass
 	
 func on_player_hit(context: Dictionary):
-	if player.invulnerable == false:
-		Transition.emit(self,"hurt",context	)
+	super(context)
 	

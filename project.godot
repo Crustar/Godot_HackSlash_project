@@ -28,6 +28,8 @@ window/size/viewport_height=360
 
 Character_hit_box=""
 Enemy_hit_box=""
+Player_body=""
+Enemy_body=""
 
 [input]
 
