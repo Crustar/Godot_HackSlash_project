@@ -13,7 +13,7 @@ const JUMP_VELOCITY = 400.0
 const MAX_SPEED = 600.0
 const MAX_JUMP_VELOCITY = 700.0
 const ACCELERATION = 700.0
-const FRICTION = 1400.0
+const FRICTION = 2000.0
 
 
 
@@ -30,7 +30,7 @@ var invulnerable = false
 
 signal player_event
 signal receive_hit
-signal death_occure
+signal death_occurred
 
 
 ## TODO : change Area2D to HitBox, maybe manually connect?
@@ -40,7 +40,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		health.damage_taken(area.damage)
 
 func _ready() -> void:
-	death_occure.connect(on_death_occure)
+	death_occurred.connect(on_death_occurred)
 
 var last_direction = 0
 func _process(delta: float) -> void:
@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 
 
 
-func on_death_occure():
+func on_death_occurred():
 	get_tree().reload_current_scene()
 
 

@@ -12,3 +12,6 @@ func _ready() -> void:
 
 func damage_taken (dmg: float):
 	health -= dmg
+	print_debug("	current health = "+str(health))
+	if health <= 0:
+		body.is_dead = true

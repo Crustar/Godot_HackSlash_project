@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://d1jm0kdjsdoh"]
+[gd_scene load_steps=12 format=4 uid="uid://d1jm0kdjsdoh"]
 
 [ext_resource type="PackedScene" uid="uid://c1tv4ktn7kmt6" path="res://src/player/player.tscn" id="1_fovfd"]
 [ext_resource type="Texture2D" uid="uid://0dslwo30l0ia" path="res://asset/level_scene/Background_0.png" id="1_vk3x4"]
 [ext_resource type="Texture2D" uid="uid://bn57nvtvt83ew" path="res://asset/level_scene/Tree-Assets.png" id="3_dxo6u"]
 [ext_resource type="Texture2D" uid="uid://cx3w6ifyhprl7" path="res://asset/level_scene/Tiles.png" id="3_mqp3c"]
-[ext_resource type="PackedScene" uid="uid://djdhyunyv8025" path="res://src/enemy/enemy_dummy.tscn" id="4_dxo6u"]
+[ext_resource type="PackedScene" uid="uid://djdhyunyv8025" path="res://src/enemy/dummy/enemy_dummy.tscn" id="4_dxo6u"]
+[ext_resource type="PackedScene" uid="uid://dbw50cbfd65kw" path="res://src/enemy/mushroom/enemy_1.tscn" id="6_05kt3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05kt3"]
 texture = ExtResource("3_dxo6u")
@@ -810,7 +811,10 @@ shape = SubResource("RectangleShape2D_vk3x4")
 one_way_collision = true
 
 [node name="EnemyDummy" parent="." instance=ExtResource("4_dxo6u")]
-position = Vector2(490, 316)
+position = Vector2(770, 294)
 
 [node name="player" parent="." instance=ExtResource("1_fovfd")]
 position = Vector2(44, 131)
+
+[node name="enemy_1" parent="." instance=ExtResource("6_05kt3")]
+position = Vector2(516, 300)

@@ -1,15 +1,12 @@
-extends PlayerState
-
-@onready var camera: Camera2D = $"../../Camera"
-
+extends EnemyState
 
 func enter(context:Dictionary = {}) -> void:
 	super()
-	player.velocity.x = 0
+	enemy.velocity.x = 0
+	enemy.toggle_collision(false)
 	animation.play("dead")
 
 
-	print_debug("entering DEAD state")
 
 func exit() -> void:
 	super()
@@ -20,12 +17,7 @@ func frame_update(delta: float) -> void:
 
 
 func physics_update(delta: float) -> void:
-	# Physic logic
-	player.velocity += player.get_gravity() * delta
-	player.move_and_slide()
-	
-	
-	# Transition logic
+	pass
 
 
 
@@ -36,4 +28,4 @@ func on_player_event(event: String) :
 
 
 func on_animation_finished(anim_name: StringName) -> void:
-	player.death_occurred.emit()
+	enemy.death_occurred.emit()

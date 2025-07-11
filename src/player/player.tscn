@@ -1,11 +1,11 @@
 [gd_scene load_steps=39 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
-[ext_resource type="Script" uid="uid://btpf0su1u2vk6" path="res://src/player/player_health.gd" id="2_4uy46"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
+[ext_resource type="Script" uid="uid://b4xupn1gmo05f" path="res://src/class/class_Health.gd" id="2_k60ra"]
 [ext_resource type="Script" uid="uid://3jnapg13wwfs" path="res://src/player/sprite.gd" id="3_6bm8s"]
 [ext_resource type="Texture2D" uid="uid://d2h2k6jp0iv31" path="res://asset/player_sprite/Walking_KG_2.png" id="3_8t03j"]
-[ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://src/state_machine/state_machine.tscn" id="3_yw30f"]
+[ext_resource type="PackedScene" uid="uid://1mkyt2mo3a06" path="res://src/state_machine/player_state_machine.tscn" id="3_yw30f"]
 [ext_resource type="Texture2D" uid="uid://dojlaqus2hxqb" path="res://asset/player_sprite/Jump_KG_2.png" id="4_2ieo8"]
 [ext_resource type="Script" uid="uid://c17m3rqfcagq5" path="res://src/class/class_HitBox.gd" id="4_5efpn"]
 [ext_resource type="Script" uid="uid://ckerxifey5ylg" path="res://src/state_machine/player/idling.gd" id="4_qjkh3"]
@@ -622,7 +622,7 @@ _data = {
 script = ExtResource("1_rkbax")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
-script = ExtResource("2_4uy46")
+script = ExtResource("2_k60ra")
 body = NodePath("..")
 metadata/_custom_type_script = "uid://b4xupn1gmo05f"
 
@@ -667,6 +667,7 @@ scale_amount_max = 2.0
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Character_hit_box"]]
 position = Vector2(0.5, 2)
 script = ExtResource("4_5efpn")
+damage = 1.0
 metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="hitboxShape_f2" type="CollisionShape2D" parent="Sprite/Hitbox"]

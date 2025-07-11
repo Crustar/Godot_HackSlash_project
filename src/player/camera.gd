@@ -16,5 +16,5 @@ func fade_to_bright():
 
 func on_animation_finished(anim_name: StringName):
 	if anim_name == "fade_to_black" and player.is_dead:
-		player.death_occure.emit()
+		player.death_occurred.emit()
 	
