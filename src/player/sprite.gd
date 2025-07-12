@@ -1,5 +1,7 @@
 extends Sprite2D
 
+## TODO: Use a singleton controller to manage VE
+
 @onready var dash_ve: CPUParticles2D = %dash_VE
 @onready var jump_ve: CPUParticles2D = %jump_VE
 

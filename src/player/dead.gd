@@ -1,5 +1,13 @@
 extends PlayerState
 
+# State: dead
+# behavior:
+#	play the dead animation (which also activate hitbox)
+#	lock any movement input
+#	follow passive physic (gravity)
+# trasition:
+#	none, deadend state
+
 @onready var camera: Camera2D = $"../../Camera"
 
 

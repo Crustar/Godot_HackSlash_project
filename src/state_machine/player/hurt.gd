@@ -1,5 +1,16 @@
 extends PlayerState
 
+# State: hurt
+# behavior:
+#	play the hurt animation 
+#	locks character's movement (knockback)
+#	follow passive physic (gravity)
+# trasition:
+#	knockback finishes:
+#		character is dead -> dead
+#		character is alive -> idle/falling/running
+#	
+
 @onready var sprite: Sprite2D = %Sprite
 
 var hit_source_pos: Vector2

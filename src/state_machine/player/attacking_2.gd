@@ -1,7 +1,18 @@
 extends PlayerState
 
-@export var can_input: bool= false
+# State: attacking2 (combo)
+# behavior:
+#	play the attacking2 animation (which also activate hitbox)
+#	slow down character movement
+#	follow passive physic (gravity)
+# trasition:
+#	under the input window:
+#		player presses jump and character can jump -> jumping
+#		player presses dash and character can dash -> dashing
+#		player presses attack -> attack3 (combo)
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
 
+@export var can_input: bool= false
 
 const speed_mod = 0.1
 

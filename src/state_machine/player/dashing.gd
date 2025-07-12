@@ -1,5 +1,18 @@
 extends PlayerState
 
+# State: dashing
+# behavior:
+#	play the dashing animation
+#	lock the character's moving direction
+#	launches the character horizontally
+#	follow passive physic (gravity)
+# trasition:
+#	dash duration timer finishes -> falling/idling/running
+#	player presses jump and character can jump -> jumping
+#	TODO: allow character to double dash
+#	TODO: dash attack
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
+
 var dash_direction = 0
 var base_velocity = 0
 @onready var dash_duration: Timer = $dash_duration

@@ -1,5 +1,17 @@
 extends PlayerState
 
+# State: running
+# behavior:
+#	play the running animation
+#	character moves in the direction that the player is inputting (left/right)
+#	follow passive physic (gravity)
+# trasition:
+#	player has no horizontal input -> indle
+#	character is no longer on the floor -> falling
+#	player presses jump and character can jump -> jumping
+#	player presses dash and character can dash -> dashing
+#	player presses attack -> attack
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
 
 func enter(context:Dictionary = {}) -> void:
 	super()

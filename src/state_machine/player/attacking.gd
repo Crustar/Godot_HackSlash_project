@@ -1,5 +1,17 @@
 extends PlayerState
 
+# State: attacking
+# behavior:
+#	play the attacking animation (which also activate hitbox)
+#	slow down character movement
+#	follow passive physic (gravity)
+# trasition:
+#	under the input window:
+#		player presses jump and character can jump -> jumping
+#		player presses dash and character can dash -> dashing
+#		player presses attack -> attack2 (combo)
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
+
 @export var can_input: bool= false
 
 const speed_mod = 0.1
@@ -19,8 +31,7 @@ func exit() -> void:
 
 func frame_update(delta: float) -> void:
 	pass
-	#var direction := Input.get_axis("left", "right")
-	#animation.flip_sprite(direction)
+
 
 func physics_update(delta: float) -> void:
 	# Physic logic
@@ -33,7 +44,7 @@ func physics_update(delta: float) -> void:
 	player.move_and_slide()
 	
 	
-	# Transition logic
+
 
 
 

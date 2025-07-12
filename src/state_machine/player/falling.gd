@@ -1,5 +1,16 @@
 extends PlayerState
 
+# State: falling
+# behavior:
+#	play the falling animation
+#	follow passive physic (gravity)
+# trasition:
+#	player landed -> idling/running 
+#	player presses jump and character can jump -> jumping
+#	player presses dash and character can dash -> dashing
+#	player presses attack -> attack
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
+
 @onready var jump_ve: CPUParticles2D = %jump_VE
 
 func enter(context:Dictionary = {}) -> void:

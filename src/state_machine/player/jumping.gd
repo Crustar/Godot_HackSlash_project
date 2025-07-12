@@ -1,5 +1,18 @@
 extends PlayerState
 
+# State: jumping
+# behavior:
+#	play the jumping animation
+#	launches character into the air
+#	follow passive physic (gravity)
+# trasition:
+#	character is no longer jumping "up" -> falling
+#	player landed -> idling/running 
+#	player presses jump and character can jump -> jumping (self)
+#	player presses dash and character can dash -> dashing
+#	player presses attack -> attack
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
+
 @onready var jump_ve: CPUParticles2D = %jump_VE
 
 func enter(context:Dictionary = {}) -> void:

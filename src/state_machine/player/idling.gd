@@ -1,5 +1,16 @@
 extends PlayerState
 
+# State: idling
+# behavior:
+#	play and loop idle animation
+#	follow passive physic (gravity)
+# trasition:
+#	character no longer on the floor -> falling
+#	player presses left/right -> running
+#	player presses jump and character can jump -> jumping
+#	player presses dash and character can dash -> dashing
+#	player presses attack -> attack
+#	character is hit by an enemy -> delegate to character's reveive_hit signal (to hurt state)
 
 func enter(context:Dictionary = {}) -> void:
 	super()
