@@ -1,34 +1,26 @@
-# About this prototype
-This prototype is meant to simulate the character object and its physics interaction.
+# About this project
+This is a work-in-progress Hack-n-Slash game developpement project. It serves as an opportinity to learn coding as well as project management.
 
-A state machine is implemented to organise different states of the character
-behavior, which includes:
+The game is being made using the game engine Godot (GDScript). The goal is to complete a game combining the platformer's moveability and fighting game's combo mechanic to create a smooth hack-n-slash game experience with skilling ceiling.
 
-1. Idle
+# Current progress
+<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjZqcjM2bTNjcjA0N3FyeXYxNHhvN3drdGRmMGt3dThvNjFkNzdieCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cgMVWltzyvk3WuC9YH/giphy.gif" width="300">
 
-2. Jump
+Basic character control logic has been implemented. Player can control the character to move, jump, dash as well as performing a 3-steps attack. Player can be hurt and die.
 
-3. Fall
+A basic enemy type (mushroom) has been implemented. It will move around and hurt the character if it touches the latter's hurtbox. It currently has no tracking mechanic that allows it to chase the character.
 
-4. Run
+A mock scene has been implemented. It contains the fore-mentioned player and enemy.
 
-5. Attack
-
-6. Dash
-
-7. Double jump
-
-8. Hurt
-
-9. Death 
+# Future plan
+1. Implement a tracking mechanic so the enemy can seek and actively tries to attck the player.
+2. Implement a new attacky style allowing the character to perform air combo.
+3. Design and create a level with spawning enemies (game loop)
 
 # Known issues
+1. Currently, the camera's limit is set manually, if multiple scenes(levels) are to be created, its parameter should be set automatically by the script
 
-
-
-# Future todo lists
-1. working on a functional enemy
-1.1 Add a tracking logic to the enemy
-2. have the camera's limit been dynamycally set
-3. merge the current git branch with the main branch
+# Lesson learned
+1. Use state machine logic to keep the scalability of the code, multiple cascades of "if" statement will quickly create confusion going into the developpement process.
+2. Pre-plan the class structure. Coding efficiency can be drastically improved if proper custom class are thought before-hand in order to not only reduce duplicant code but also allow dev to better understand why an object is coded in such a way.
 
