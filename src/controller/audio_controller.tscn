@@ -1,0 +1,40 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhanuh1txt47u"]
+
+[ext_resource type="Script" uid="uid://8y42xfjw40ho" path="res://src/controller/audio_controller.gd" id="1_5qpge"]
+[ext_resource type="AudioStream" uid="uid://bh013pr32n0xm" path="res://asset/sound_effect/07_human_atk_sword_1.wav" id="1_lac31"]
+[ext_resource type="AudioStream" uid="uid://n17jrwoirvfa" path="res://asset/sound_effect/07_human_atk_sword_2.wav" id="2_5qpge"]
+[ext_resource type="AudioStream" uid="uid://bpw6veg5nhnfd" path="res://asset/sound_effect/07_human_atk_sword_3.wav" id="3_myfby"]
+[ext_resource type="AudioStream" uid="uid://do68jk35wmxq6" path="res://asset/sound_effect/15_human_dash_1.wav" id="4_fy8ix"]
+[ext_resource type="AudioStream" uid="uid://hnuaov5f8gpp" path="res://asset/sound_effect/15_human_dash_2.wav" id="5_57h60"]
+[ext_resource type="AudioStream" uid="uid://dn8h7ja2hchpm" path="res://asset/sound_effect/12_human_jump_1.wav" id="6_uehl4"]
+[ext_resource type="AudioStream" uid="uid://b0kn5xneepgah" path="res://asset/sound_effect/12_human_jump_2.wav" id="7_fx2ab"]
+[ext_resource type="AudioStream" uid="uid://cpjim1kvr38gd" path="res://asset/sound_effect/12_human_jump_3.wav" id="8_dyb6v"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lg6u7"]
+streams_count = 3
+stream_0/stream = ExtResource("1_lac31")
+stream_1/stream = ExtResource("2_5qpge")
+stream_2/stream = ExtResource("3_myfby")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a2tbi"]
+streams_count = 2
+stream_0/stream = ExtResource("4_fy8ix")
+stream_1/stream = ExtResource("5_57h60")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_486lp"]
+streams_count = 3
+stream_0/stream = ExtResource("6_uehl4")
+stream_1/stream = ExtResource("7_fx2ab")
+stream_2/stream = ExtResource("8_dyb6v")
+
+[node name="AudioController" type="Node"]
+script = ExtResource("1_5qpge")
+
+[node name="Attack" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_lg6u7")
+
+[node name="Dash" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_a2tbi")
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_486lp")
