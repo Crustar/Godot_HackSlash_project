@@ -20,7 +20,7 @@ func enter(context:Dictionary = {}) -> void:
 	player.dash_count = 0
 	
 	animation.play("running")
-	print_debug("entering RUNNING state")	
+	#print_debug("entering RUNNING state")	
 
 func exit() -> void:
 	super()

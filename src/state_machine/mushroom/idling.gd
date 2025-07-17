@@ -16,6 +16,7 @@ func randome_time():
 
 func exit() -> void:
 	super()
+	idle_timer.stop()
 
 
 

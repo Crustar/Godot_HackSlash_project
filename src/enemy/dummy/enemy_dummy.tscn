@@ -121,6 +121,8 @@ size = Vector2(16, 63)
 size = Vector2(23, 69.5)
 
 [node name="EnemyDummy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

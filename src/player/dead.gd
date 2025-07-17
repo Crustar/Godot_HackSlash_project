@@ -17,7 +17,6 @@ func enter(context:Dictionary = {}) -> void:
 	animation.play("dead")
 
 
-	print_debug("entering DEAD state")
 
 func exit() -> void:
 	super()

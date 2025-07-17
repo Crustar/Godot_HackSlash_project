@@ -783,6 +783,7 @@ texture = ExtResource("1_vk3x4")
 centered = false
 
 [node name="floor" type="StaticBody2D" parent="."]
+collision_mask = 7
 
 [node name="BackLayer" type="TileMapLayer" parent="floor"]
 use_parent_material = true
@@ -817,4 +818,4 @@ position = Vector2(770, 294)
 position = Vector2(44, 131)
 
 [node name="enemy_1" parent="." instance=ExtResource("6_05kt3")]
-position = Vector2(516, 300)
+position = Vector2(453, 319)

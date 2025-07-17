@@ -19,7 +19,7 @@ func enter(context:Dictionary = {}) -> void:
 	player.dash_count = 0
 	
 	animation.play("idling")
-	print_debug("entering IDLING state")
+	#print_debug("entering IDLING state")
 
 func exit() -> void:
 	super()

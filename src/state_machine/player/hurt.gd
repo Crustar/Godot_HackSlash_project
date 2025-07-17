@@ -33,11 +33,10 @@ func enter(context:Dictionary = {}) -> void:
 	player.invulnerable = true
 	
 	animation.play("hurt")
-	print_debug("entering HURT state")
+	#print_debug("entering HURT state")
 
 func exit() -> void:
 	super()
-	pass
 
 func frame_update(delta: float) -> void:
 	pass

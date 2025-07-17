@@ -23,7 +23,7 @@ func enter(context:Dictionary = {}) -> void:
 	facing = animation.sprite.scale.x
 	animation.play("attacking2")
 	AudioController.play_sound("Attack",0.1)
-	print_debug("entering ATTACKING COMBO 2 state")
+	#print_debug("entering ATTACKING COMBO 2 state")
 
 func exit() -> void:
 	super()
