@@ -21,7 +21,7 @@ func enter(context:Dictionary = {}) -> void:
 	animation.play("jumping")
 	AudioController.play_sound("Jump")
 	
-	print_debug("entering JUMPING state")
+	#print_debug("entering JUMPING state")
 
 func exit() -> void:
 	super()

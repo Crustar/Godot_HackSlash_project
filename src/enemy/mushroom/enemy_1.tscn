@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbw50cbfd65kw"]
+[gd_scene load_steps=26 format=3 uid="uid://dbw50cbfd65kw"]
 
 [ext_resource type="Script" uid="uid://clo6ipbe2j68j" path="res://src/enemy/mushroom/enemy_1.gd" id="1_n6v3k"]
 [ext_resource type="Script" uid="uid://b4xupn1gmo05f" path="res://src/class/class_Health.gd" id="1_tx7ax"]
+[ext_resource type="PackedScene" uid="uid://c2lipq72i4pqg" path="res://src/enemy/tools/chase_brain/enemy_chase_brain.tscn" id="2_7rgtk"]
 [ext_resource type="Script" uid="uid://dyoqdgu3nnjjx" path="res://src/class/class_HurtBox.gd" id="2_cmofg"]
 [ext_resource type="Texture2D" uid="uid://cm37ri0xenm8g" path="res://asset/mushroom_sprite/Mushroom-Idle.png" id="2_xxr47"]
 [ext_resource type="Script" uid="uid://c17m3rqfcagq5" path="res://src/class/class_HitBox.gd" id="3_ai7er"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bjlho46w0cv2" path="res://src/state_machine/mushroom/patrolling.gd" id="10_sk06o"]
 [ext_resource type="Script" uid="uid://ds5rqurauea6o" path="res://src/state_machine/mushroom/hurt.gd" id="12_vm764"]
 [ext_resource type="Script" uid="uid://c5wiu0j2vt2nd" path="res://src/state_machine/mushroom/dead.gd" id="15_7rgtk"]
+[ext_resource type="Script" uid="uid://dpddfvx8k7kig" path="res://src/state_machine/mushroom/chasing.gd" id="15_v7l80"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxr47"]
 size = Vector2(16, 34)
@@ -321,7 +323,12 @@ _data = {
 }
 
 [node name="Mushroom" type="CharacterBody2D" groups=["Enemy_body"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_n6v3k")
+
+[node name="EnemyChaseBrain" parent="." instance=ExtResource("2_7rgtk")]
+tracking_range = 200
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("1_tx7ax")
@@ -364,6 +371,7 @@ position = Vector2(9, 23)
 target_position = Vector2(0, 14)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_nji5j")
 
@@ -394,6 +402,10 @@ metadata/_custom_type_script = "uid://dtdx8lsx307qk"
 
 [node name="PatrolTimer" type="Timer" parent="enemy_state_machine/patrolling"]
 one_shot = true
+
+[node name="chasing" type="Node" parent="enemy_state_machine"]
+script = ExtResource("15_v7l80")
+metadata/_custom_type_script = "uid://dtdx8lsx307qk"
 
 [node name="hurt" type="Node" parent="enemy_state_machine"]
 script = ExtResource("12_vm764")

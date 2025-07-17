@@ -22,6 +22,7 @@ func enter(context:Dictionary = {}) -> void:
 
 func exit() -> void:
 	super()
+	patrol_timer.stop()
 
 
 

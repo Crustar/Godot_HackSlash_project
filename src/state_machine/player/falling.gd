@@ -16,7 +16,7 @@ extends PlayerState
 func enter(context:Dictionary = {}) -> void:
 	super()
 	animation.play("falling")
-	print_debug("entering FALLING state")
+	#print_debug("entering FALLING state")
 
 func exit() -> void:
 	super()

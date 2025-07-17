@@ -13,14 +13,15 @@ A basic enemy type (mushroom) has been implemented. It will move around and hurt
 A mock scene has been implemented. It contains the fore-mentioned player and enemy.
 
 # Future plan
-1. Implement a tracking mechanic so the enemy can seek and actively tries to attck the player.
+1. Design and create a level with spawning enemies (game loop)
+2. Work on a UI component that displays player info
 2. Implement a new attacky style allowing the character to perform air combo.
-3. Design and create a level with spawning enemies (game loop)
 
 # Known issues
 1. Currently, the camera's limit is set manually, if multiple scenes(levels) are to be created, its parameter should be set automatically by the script
+2. When the enemy hits an character that's cornered, the enemy will keep pushing the character into stucking and not triggering further attacks since the hitbox is in the character's hurtbox, thus no signal triggers. This will result a soft lock situation unless character kills the enemy.
 
 # Lesson learned
 1. Use state machine logic to keep the scalability of the code, multiple cascades of "if" statement will quickly create confusion going into the developpement process.
 2. Pre-plan the class structure. Coding efficiency can be drastically improved if proper custom class are thought before-hand in order to not only reduce duplicant code but also allow dev to better understand why an object is coded in such a way.
-
+3. "Call down, signal up", having a clear general logic when it comes how nodes communicate with each other will drastically increase extensibility and maintainability.

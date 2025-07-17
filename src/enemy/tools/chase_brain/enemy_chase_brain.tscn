@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2lipq72i4pqg"]
+
+[ext_resource type="Script" uid="uid://dmvvt7ju0ifl1" path="res://src/enemy/tools/chase_brain/enemy_chase_brain.gd" id="1_0rfdr"]
+[ext_resource type="Script" uid="uid://bws1ap1k6y741" path="res://src/enemy/tools/chase_brain/tracking_ray.gd" id="1_laah6"]
+[ext_resource type="Script" uid="uid://xh2axedlpsia" path="res://src/enemy/tools/chase_brain/tracking_range.gd" id="2_6aia6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rfdr"]
+radius = 130.0
+
+[node name="EnemyChaseBrain" type="Node2D"]
+script = ExtResource("1_0rfdr")
+tracking_range = 130
+
+[node name="TrackingRay" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, -1)
+collision_mask = 3
+script = ExtResource("1_laah6")
+
+[node name="TrackingRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_6aia6")
+
+[node name="trackingSphere" type="CollisionShape2D" parent="TrackingRange"]
+shape = SubResource("CircleShape2D_0rfdr")
