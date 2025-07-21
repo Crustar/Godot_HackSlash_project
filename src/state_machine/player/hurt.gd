@@ -33,6 +33,7 @@ func enter(context:Dictionary = {}) -> void:
 	player.invulnerable = true
 	
 	animation.play("hurt")
+	Ui.blink_heart()
 	#print_debug("entering HURT state")
 
 func exit() -> void:

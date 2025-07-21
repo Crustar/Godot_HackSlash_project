@@ -1016,6 +1016,7 @@ drag_bottom_margin = 0.1
 script = ExtResource("18_o04tx")
 
 [node name="FadeBlack" parent="Camera" instance=ExtResource("18_vwi60")]
+layer = 10
 visible = false
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]

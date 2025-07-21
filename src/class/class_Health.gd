@@ -3,6 +3,8 @@ class_name Health extends Node
 @export var body: CharacterBody2D
 var health : float = 0
 
+signal health_updated
+
 func _ready() -> void: 
 	for child in body.get_children():
 		if child is Sprite2D :
@@ -23,5 +25,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 func damage_taken (dmg: float):
 	health -= dmg
+	health_updated.emit(health)
 	if health <= 0:
 		body.is_dead = true
