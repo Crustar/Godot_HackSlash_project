@@ -87,7 +87,9 @@ signal death_occurred
 
 
 func _ready() -> void:
+	health.health_updated.connect(on_health_update)
 	death_occurred.connect(on_death_occurred)
+	Ui.set_hp(health.health)
 
 # Every frame, the game checks if certain keys are just pressed and emit the
 # [player_event] signal with the corresponding String. It is used for the states
@@ -122,6 +124,5 @@ func _process(delta: float) -> void:
 func on_death_occurred():
 	get_tree().reload_current_scene()
 
-
-
-	
+func on_health_update(current_health: float):
+	Ui.set_hp(current_health as int)

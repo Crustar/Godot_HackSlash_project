@@ -20,6 +20,7 @@ A mock scene has been implemented. It contains the fore-mentioned player and ene
 # Known issues
 1. Currently, the camera's limit is set manually, if multiple scenes(levels) are to be created, its parameter should be set automatically by the script
 2. When the enemy hits an character that's cornered, the enemy will keep pushing the character into stucking and not triggering further attacks since the hitbox is in the character's hurtbox, thus no signal triggers. This will result a soft lock situation unless character kills the enemy.
+3. When the player attack in the air and then cancel with dash in the opposite direction, the character sprite will not flip to the right facing as well as the dashing speed
 
 # Lesson learned
 1. Use state machine logic to keep the scalability of the code, multiple cascades of "if" statement will quickly create confusion going into the developpement process.
