@@ -35,7 +35,7 @@ func get_chase_data() -> Vector2:
 	return last_seen_position
 
 func track_target(target: Vector2):
-	target_position = target - global_position + Vector2(0,-1) 
+	target_position = target - global_position + Vector2(0,-10) 
 	# edeg effect, the position is on the edge of the shape, add 1 pixel make collide from under possible
 
 func enable(target_body: CharacterBody2D):
