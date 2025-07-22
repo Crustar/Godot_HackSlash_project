@@ -51,10 +51,8 @@ func on_animation_finished(anim_name: StringName):
 	if enemy.is_dead:
 		Transition.emit(self,"dead")
 	elif enemy.is_chasing:
-		enemy.toggle_attack(true)
 		enemy.invulnerable = false
 		Transition.emit(self,"chasing")
 	else:
-		enemy.toggle_attack(true)
 		enemy.invulnerable = false
 		Transition.emit(self,"patrolling")

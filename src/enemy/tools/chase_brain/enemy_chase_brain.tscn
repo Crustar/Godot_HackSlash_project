@@ -12,6 +12,7 @@ script = ExtResource("1_0rfdr")
 tracking_range = 130
 
 [node name="TrackingRay" type="RayCast2D" parent="."]
+position = Vector2(0, -2)
 enabled = false
 target_position = Vector2(0, -1)
 collision_mask = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbw50cbfd65kw"]
+[gd_scene load_steps=30 format=3 uid="uid://dbw50cbfd65kw"]
 
 [ext_resource type="Script" uid="uid://clo6ipbe2j68j" path="res://src/enemy/mushroom/enemy_1.gd" id="1_n6v3k"]
 [ext_resource type="Script" uid="uid://b4xupn1gmo05f" path="res://src/class/class_Health.gd" id="1_tx7ax"]
@@ -14,12 +14,17 @@
 [ext_resource type="Script" uid="uid://c01eufrpgjje0" path="res://src/state_machine/mushroom/idling.gd" id="7_xxr47"]
 [ext_resource type="Texture2D" uid="uid://cs4eajbkmokcs" path="res://asset/mushroom_sprite/Mushroom-Die.png" id="9_yt024"]
 [ext_resource type="Script" uid="uid://bjlho46w0cv2" path="res://src/state_machine/mushroom/patrolling.gd" id="10_sk06o"]
+[ext_resource type="Texture2D" uid="uid://b7bslnunayyos" path="res://asset/mushroom_sprite/Mushroom-Attack.png" id="11_bpnwj"]
 [ext_resource type="Script" uid="uid://ds5rqurauea6o" path="res://src/state_machine/mushroom/hurt.gd" id="12_vm764"]
 [ext_resource type="Script" uid="uid://c5wiu0j2vt2nd" path="res://src/state_machine/mushroom/dead.gd" id="15_7rgtk"]
 [ext_resource type="Script" uid="uid://dpddfvx8k7kig" path="res://src/state_machine/mushroom/chasing.gd" id="15_v7l80"]
+[ext_resource type="Script" uid="uid://svefi3li7cli" path="res://src/state_machine/mushroom/attacking.gd" id="17_n4y8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxr47"]
-size = Vector2(16, 34)
+size = Vector2(27.375, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpnwj"]
+size = Vector2(25, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nji5j"]
 size = Vector2(14, 32)
@@ -85,6 +90,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hitbox/HitboxShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_v7l80"]
@@ -313,9 +330,74 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_mrqxv"]
+resource_name = "attack"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_bpnwj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/HitboxShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wgjw4"]
 _data = {
 &"RESET": SubResource("Animation_n6v3k"),
+&"attacking": SubResource("Animation_mrqxv"),
 &"dead": SubResource("Animation_v7l80"),
 &"hurt": SubResource("Animation_sk06o"),
 &"idling": SubResource("Animation_xxr47"),
@@ -345,14 +427,25 @@ script = ExtResource("4_4d3q0")
 
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Enemy_hit_box"]]
 visible = false
-position = Vector2(0, 16)
+position = Vector2(27, 16)
+scale = Vector2(1.6, 1)
 script = ExtResource("3_ai7er")
 damage = 1.0
+knock_back_power = 1.5
 metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Sprite/Hitbox"]
-position = Vector2(0, -1)
+position = Vector2(-8.1875, 2)
 shape = SubResource("RectangleShape2D_xxr47")
+disabled = true
+
+[node name="HitCheck" type="Area2D" parent="Sprite"]
+visible = false
+collision_mask = 2
+
+[node name="CheckShape" type="CollisionShape2D" parent="Sprite/HitCheck"]
+position = Vector2(22.5, 18)
+shape = SubResource("RectangleShape2D_bpnwj")
 
 [node name="Hurtbox" type="Area2D" parent="Sprite"]
 visible = false
@@ -406,6 +499,13 @@ one_shot = true
 [node name="chasing" type="Node" parent="enemy_state_machine"]
 script = ExtResource("15_v7l80")
 metadata/_custom_type_script = "uid://dtdx8lsx307qk"
+
+[node name="attacking" type="Node" parent="enemy_state_machine"]
+script = ExtResource("17_n4y8x")
+metadata/_custom_type_script = "uid://dtdx8lsx307qk"
+
+[node name="attack_CD" type="Timer" parent="enemy_state_machine/attacking"]
+one_shot = true
 
 [node name="hurt" type="Node" parent="enemy_state_machine"]
 script = ExtResource("12_vm764")
