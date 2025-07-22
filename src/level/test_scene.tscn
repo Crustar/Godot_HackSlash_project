@@ -495,6 +495,7 @@ tile_map_data = PackedByteArray("AAADACwAAAACAAEAAAADAC0AAAACAAIAAAADAC4AAAACAAM
 tile_set = SubResource("TileSet_dxo6u")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor"]
+visible = false
 position = Vector2(0, -2)
 polygon = PackedVector2Array(-10, 0, -10, 765, 1586, 765, 1586, 0, 1561, 0, 1561, 705, -7, 705, -7, 0)
 
@@ -502,7 +503,7 @@ polygon = PackedVector2Array(-10, 0, -10, 765, 1586, 765, 1586, 0, 1561, 0, 1561
 position = Vector2(1580, 790)
 
 [node name="player" parent="." instance=ExtResource("1_fovfd")]
-position = Vector2(928, 690)
+position = Vector2(520, 679)
 
 [node name="Mushroom3" parent="." instance=ExtResource("6_05kt3")]
-position = Vector2(710, 686)
+position = Vector2(901, 683)

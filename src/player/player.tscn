@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c1tv4ktn7kmt6"]
+[gd_scene load_steps=47 format=3 uid="uid://c1tv4ktn7kmt6"]
 
 [ext_resource type="Script" uid="uid://bjxmhq005u8pi" path="res://src/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b2m4b8o4uxkny" path="res://asset/player_sprite/Idle_KG_2.png" id="2_boad6"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://10i11wd77s1n" path="res://asset/player_sprite/Attack_KG_2.png" id="14_vwi60"]
 [ext_resource type="Texture2D" uid="uid://w5srevpnv7yx" path="res://asset/player_sprite/Attack_KG_3.png" id="15_j2873"]
 [ext_resource type="Script" uid="uid://6pokw7l256mv" path="res://src/player/camera.gd" id="18_o04tx"]
-[ext_resource type="PackedScene" uid="uid://cj2kr6d8txp2l" path="res://src/Interface/fade_black.tscn" id="18_vwi60"]
 [ext_resource type="Script" uid="uid://be4y1aolgcmrf" path="res://src/state_machine/player/hurt.gd" id="20_jcdrv"]
 [ext_resource type="Script" uid="uid://bsiumn8bx4bt7" path="res://src/player/dead.gd" id="25_k60ra"]
 [ext_resource type="Script" uid="uid://ek73t3p6pj34" path="res://src/state_machine/player/attacking_2.gd" id="25_o04tx"]
@@ -989,6 +988,7 @@ position = Vector2(0.25, 2)
 shape = SubResource("RectangleShape2D_2smqc")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_2smqc")
 
@@ -1013,10 +1013,6 @@ drag_left_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 script = ExtResource("18_o04tx")
-
-[node name="FadeBlack" parent="Camera" instance=ExtResource("18_vwi60")]
-layer = 10
-visible = false
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("initial_state", "player_node", "animation_player_node") instance=ExtResource("3_yw30f")]
 initial_state = NodePath("idling")

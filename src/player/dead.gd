@@ -8,7 +8,6 @@ extends PlayerState
 # trasition:
 #	none, deadend state
 
-@onready var camera: Camera2D = $"../../Camera"
 
 
 func enter(context:Dictionary = {}) -> void:
@@ -43,4 +42,5 @@ func on_player_event(event: String) :
 
 
 func on_animation_finished(anim_name: StringName) -> void:
-	player.death_occurred.emit()
+	player.is_dead = true
+	Ui.fade_transition.fade_to_black()

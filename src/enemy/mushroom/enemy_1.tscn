@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://svefi3li7cli" path="res://src/state_machine/mushroom/attacking.gd" id="17_n4y8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxr47"]
-size = Vector2(16.25, 26)
+size = Vector2(27.375, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpnwj"]
 size = Vector2(25, 26)
@@ -410,7 +410,6 @@ collision_mask = 7
 script = ExtResource("1_n6v3k")
 
 [node name="EnemyChaseBrain" parent="." instance=ExtResource("2_7rgtk")]
-visible = false
 tracking_range = 200
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -427,14 +426,16 @@ hframes = 7
 script = ExtResource("4_4d3q0")
 
 [node name="Hitbox" type="Area2D" parent="Sprite" groups=["Enemy_hit_box"]]
+visible = false
 position = Vector2(27, 16)
 scale = Vector2(1.6, 1)
 script = ExtResource("3_ai7er")
 damage = 1.0
+knock_back_power = 1.5
 metadata/_custom_type_script = "uid://c17m3rqfcagq5"
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Sprite/Hitbox"]
-position = Vector2(-2.625, 2)
+position = Vector2(-8.1875, 2)
 shape = SubResource("RectangleShape2D_xxr47")
 disabled = true
 

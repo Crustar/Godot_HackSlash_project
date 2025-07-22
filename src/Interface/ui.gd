@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 @onready var heart: TextureRect = $Heart
+@onready var fade_transition: CanvasLayer = $FadeTransition
+
 
 func blink_heart():
 	heart.blink()

@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1acfdj464ar5"]
+[gd_scene load_steps=4 format=3 uid="uid://d1acfdj464ar5"]
 
 [ext_resource type="PackedScene" uid="uid://dacoq7fan7fyd" path="res://src/Interface/heart/heart.tscn" id="1_o2m4h"]
 [ext_resource type="Script" uid="uid://igreowhph3y6" path="res://src/Interface/ui.gd" id="1_yjkhp"]
+[ext_resource type="PackedScene" uid="uid://cj2kr6d8txp2l" path="res://src/Interface/screen_effect/fade_transition.tscn" id="3_yff28"]
 
 [node name="UI" type="CanvasLayer"]
 layer = 5
 script = ExtResource("1_yjkhp")
 
 [node name="Heart" parent="." instance=ExtResource("1_o2m4h")]
+
+[node name="FadeTransition" parent="." instance=ExtResource("3_yff28")]
