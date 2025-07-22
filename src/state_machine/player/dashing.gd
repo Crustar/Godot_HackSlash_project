@@ -34,7 +34,7 @@ func enter(context:Dictionary = {}) -> void:
 func exit() -> void:
 	super()
 	player.velocity.x = 0
-	pass
+	dash_duration.stop()
 	
 func frame_update(delta: float) -> void:
 	pass
