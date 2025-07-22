@@ -24,9 +24,14 @@ func frame_update(delta: float) -> void:
 
 func physics_update(delta: float) -> void:	
 	if (abs(chase_target.x - enemy.position.x) < 10 or enemy.is_on_wall()) and not enemy.have_sight:
+		print_debug(str(abs(chase_target.x - enemy.position.x)) + " " + str(enemy.is_on_wall()) + " " + str(enemy.have_sight))
 		chase_target = Vector2.ZERO
 		enemy.is_chasing = false
 		Transition.emit(self,"idling")
+		return
+	
+	if enemy.can_attack and not enemy.is_in_attack_cd:
+		Transition.emit(self,"attacking")
 		return
 	
 	chase_target = enemy.get_chase_data()

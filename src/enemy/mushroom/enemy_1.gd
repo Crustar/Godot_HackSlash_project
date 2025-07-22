@@ -16,8 +16,9 @@ var invulnerable = false
 var is_chasing : bool = false
 var have_sight : bool = false
 
-var home_coord : Vector2		# TODO: Implement home patrol
-var patrol_range : int = 200
+var can_attack : bool = false
+var is_in_attack_cd : bool = false
+
 
 signal receive_hit
 signal death_occurred
@@ -28,6 +29,7 @@ signal target_lost
 @onready var enemy_chase_brain: Node2D = $EnemyChaseBrain
 @onready var health: Health = $Health
 @onready var hitbox: HitBox = $Sprite/Hitbox
+@onready var hit_check: Area2D = $Sprite/HitCheck
 
 
 func _ready() -> void:
@@ -35,6 +37,8 @@ func _ready() -> void:
 	death_occurred.connect(on_death_occurred)
 	enemy_chase_brain.target_found.connect(on_target_found)
 	enemy_chase_brain.target_lost.connect(on_target_lost)
+	hit_check.body_entered.connect(on_body_entered_attack_zone)
+	hit_check.body_exited.connect(on_body_left_attack_zone)
 
 func _physics_process(delta: float) -> void:
 	if is_chasing:
@@ -66,3 +70,11 @@ func on_target_found():
 func on_target_lost():
 	have_sight = false
 	self.target_lost.emit()
+
+func on_body_entered_attack_zone(body: Node2D):
+	if body.is_in_group("Player_body"):
+		can_attack = true
+
+func on_body_left_attack_zone(body: Node2D):
+	if body.is_in_group("Player_body"):
+		can_attack = false
