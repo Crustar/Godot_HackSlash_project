@@ -6,7 +6,7 @@ signal faded_to_black_finished
 signal faded_to_bright_finished
 
 func _ready() -> void:
-	visible = true
+	$ColorRect.visible = true
 
 func fade_to_black():
 	animation_player.play("fade_to_black")

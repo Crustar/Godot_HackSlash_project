@@ -19,6 +19,7 @@ A mock scene has been implemented. It contains the fore-mentioned player and ene
 # Known issues
 1. Currently, the camera's limit is set manually, if multiple scenes(levels) are to be created, its parameter should be set automatically by the script
 2. When the player attack in the air and then cancel with dash in the opposite direction, the character sprite will not flip to the right facing as well as the dashing speed
+3. If the mushroom enemy hits the player when it's too close to the player, the player will be knocked into the mushroom instead of being pushed away from it. It is caused by the hitbox of the mushroom too far from its collision box
 
 # Lesson learned
 1. Use state machine logic to keep the scalability of the code, multiple cascades of "if" statement will quickly create confusion going into the developpement process.
